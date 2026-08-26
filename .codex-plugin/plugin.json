@@ -1,0 +1,41 @@
+{
+  "name": "design-director",
+  "version": "0.1.0",
+  "description": "Orchestrate premium, brand-aware visual product design from brief to verified implementation.",
+  "author": {
+    "name": "Local Design Director"
+  },
+  "license": "MIT",
+  "keywords": [
+    "design",
+    "art-direction",
+    "ui-ux",
+    "visual-qa",
+    "design-systems",
+    "image-generation",
+    "frontend"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Design Director",
+    "shortDescription": "Direct premium visual product work",
+    "longDescription": "A senior design orchestration skill for product interfaces, brand systems, image-directed experiences, responsive implementation, and evidence-driven visual QA.",
+    "developerName": "Local Design Director",
+    "category": "Creativity",
+    "capabilities": [
+      "Art direction",
+      "UI/UX design",
+      "Design systems",
+      "Image direction",
+      "Visual QA"
+    ],
+    "brandColor": "#101828",
+    "composerIcon": "assets/design-director.svg",
+    "defaultPrompt": [
+      "Use $design-director to direct this product's visual system.",
+      "Use $design-director to redesign this interface and verify the result.",
+      "Use $design-director to create a brand-aware visual direction."
+    ],
+    "screenshots": []
+  }
+}

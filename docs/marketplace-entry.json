@@ -1,0 +1,20 @@
+{
+  "name": "design-director-local",
+  "interface": {
+    "displayName": "Design Director Local"
+  },
+  "plugins": [
+    {
+      "name": "design-director",
+      "source": {
+        "source": "local",
+        "path": "./plugins/design-director"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Creativity"
+    }
+  ]
+}

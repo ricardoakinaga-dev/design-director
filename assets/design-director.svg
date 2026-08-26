@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Design Director mark</title>
+  <desc id="desc">A dark square with a warm aperture and a precise center point.</desc>
+  <rect width="512" height="512" rx="112" fill="#101828"/>
+  <circle cx="256" cy="256" r="146" fill="none" stroke="#F8F5EF" stroke-width="18"/>
+  <path d="M256 110v292M110 256h292" stroke="#F6B75B" stroke-width="18" stroke-linecap="round" opacity=".95"/>
+  <circle cx="256" cy="256" r="38" fill="#F6B75B" stroke="#F8F5EF" stroke-width="12"/>
+</svg>

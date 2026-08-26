@@ -1,0 +1,230 @@
+{
+  "skill_name": "design-director",
+  "evals": [
+    {
+      "id": "dd-01-banner-positive",
+      "prompt": "Crie um banner premium para uma clínica veterinária. Quero uma imagem calorosa, um CTA claro e texto legível em desktop e mobile.",
+      "expected_output": "Ativa a direção visual, define brief/asset plan, escolhe imagem raster para a cena e HTML/SVG para texto/CTA, e propõe QA responsivo.",
+      "expectations": [
+        "Classifica o pedido como banner e cria uma tese visual curta antes do asset.",
+        "Usa o Visual Prompt Compiler e não inventa claims clínicos ou urgência.",
+        "Mantém CTA e texto editáveis quando possível e cobre crop mobile.",
+        "Encaminha geração raster ao imagegen nativo sem exigir API key."
+      ],
+      "expected_skill": "design-director"
+    },
+    {
+      "id": "dd-02-python-negative",
+      "prompt": "Melhore esta função Python para reduzir a latência e corrija os testes que estão falhando.",
+      "expected_output": "Não ativa Design Director; encaminha para engenharia/depuração sem gerar imagens, redesenhar a UI ou abrir o navegador.",
+      "expectations": [
+        "Não seleciona design-director para uma tarefa puramente lógica.",
+        "Não chama imagegen, Figma, Browser ou frontend-app-builder.",
+        "Não inventa uma superfície visual inexistente."
+      ],
+      "expected_skill": null
+    },
+    {
+      "id": "dd-03-backend-negative-pack",
+      "prompt": "Adicione retry ao backend, otimize esta consulta SQL, corrija meu Dockerfile e conserte este bug lógico; não há interface envolvida.",
+      "expected_output": "Recusa o escopo visual e mantém a resposta em engenharia apropriada.",
+      "expectations": [
+        "Não ativa design-director por palavras como Docker, SQL ou bug.",
+        "Não força uma auditoria estética em código sem superfície visual."
+      ],
+      "expected_skill": null
+    },
+    {
+      "id": "dd-04-dashboard-redesign",
+      "prompt": "Este dashboard está visualmente ruim. Redesenhe-o usando os tokens existentes, preserve a tabela e faça filtros, estados vazio/erro e mobile funcionarem.",
+      "expected_output": "Audita a tela existente, preserva o sistema, melhora hierarquia/densidade, mantém a tabela como tabela e entrega plano de implementação e QA.",
+      "expectations": [
+        "Inspeciona tokens, fontes, componentes, tabela, filtros e estados antes de propor mudanças.",
+        "Não converte a tabela em uma pilha decorativa de cards.",
+        "Define comportamento em 375, 768 e 1440px quando aplicável.",
+        "Roteia semântica de gráficos ao especialista de data-visualization quando necessário."
+      ],
+      "expected_skill": "design-director"
+    },
+    {
+      "id": "dd-05-saas-landing",
+      "prompt": "Crie uma landing page SaaS premium para equipes de pesquisa. Faça o conceito da superfície completa antes da implementação e não invente métricas, logos ou depoimentos.",
+      "expected_output": "Define narrativa, sistema visual, asset plan e critérios de implementação; compõe a página completa sem template genérico e inclui responsividade/QA.",
+      "expectations": [
+        "Define proposta, hierarquia e CTA antes de listar módulos.",
+        "Usa claims/provas apenas se fornecidos e marca placeholders como placeholders.",
+        "Evita hero genérico, badge overload, gradiente clichê e header-only concept.",
+        "Orquestra frontend-app-builder como dono da construção quando disponível."
+      ],
+      "expected_skill": "design-director"
+    },
+    {
+      "id": "dd-06-svg-medium-negative",
+      "prompt": "Troque o ícone SVG deste botão por uma seta geométrica de 16px, preservando o viewBox e a família de ícones existente.",
+      "expected_output": "Edita ou especifica SVG diretamente, com inspeção de viewBox/traço e sem gerar raster.",
+      "expectations": [
+        "Escolhe SVG/vector como medium correto.",
+        "Não chama imagegen para um ícone geométrico simples.",
+        "Preserva viewBox, peso ótico e convenções existentes."
+      ],
+      "expected_skill": "design-director"
+    },
+    {
+      "id": "dd-07-identity-lock",
+      "prompt": "Crie uma composição de campanha usando exatamente esta embalagem do produto como referência de identidade e esta segunda imagem apenas como referência de iluminação. Mude o cenário, mas preserve logo, rótulo, proporções e paleta.",
+      "expected_output": "Classifica as imagens, cria identity lock e separa mudança estrutural/local de mudança de estilo antes de uma edição direcionada.",
+      "expectations": [
+        "Classifica embalagem como identity/subject/edit target e a segunda imagem como style/lighting.",
+        "Repete explicitamente o que deve ser preservado e o que pode mudar.",
+        "Inspeciona o alvo antes de editar e não redesenha o logo por aproximação.",
+        "Mantém a UI/copy fora do raster quando deve ser exata."
+      ],
+      "expected_skill": "design-director"
+    },
+    {
+      "id": "dd-08-screenshot-reconstruction",
+      "prompt": "Implemente este screenshot em um app existente. A implementação atual tem espaçamento, tipografia, ícones e cores deliberadamente diferentes da referência.",
+      "expected_output": "Faz reconstrução visual baseada em camadas, executa comparação renderizada e mantém um fidelity ledger até corrigir os maiores desvios.",
+      "expectations": [
+        "Inspeciona a referência em resolução nativa e separa observação de inferência.",
+        "Compara geometria, tipografia, espaçamento, cor, ícones e estados.",
+        "Não transforma o screenshot inteiro em uma imagem nem declara pixel-perfect após uma olhada.",
+        "Pede ou usa um critic independente após uma correção material."
+      ],
+      "expected_skill": "design-director"
+    },
+    {
+      "id": "dd-09-hero-only-scope",
+      "prompt": "No meu aplicativo existente, faça apenas o hero mais bonito. Preserve todas as outras telas, o conteúdo e os fluxos.",
+      "expected_output": "Restringe a mudança ao hero e dependências visuais mínimas, sem reescrever a aplicação ou inventar uma nova narrativa de produto.",
+      "expectations": [
+        "Declara escopo hero-only e o que ficará inalterado.",
+        "Preserva copy, claims, tokens e fluxos fora da área autorizada.",
+        "Avalia crop, hierarquia, CTA e responsive states do hero sem expandir o trabalho."
+      ],
+      "expected_skill": "design-director"
+    },
+    {
+      "id": "dd-10-audit-positive",
+      "prompt": "Faça uma auditoria visual desta interface: hierarquia, tipografia, contraste, espaçamento, alinhamento, densidade, acessibilidade, responsividade e consistência.",
+      "expected_output": "Produz diagnóstico priorizado com evidência, severidade Critical/High/Medium/Low/Polish e recomendações sem fingir que o código foi alterado.",
+      "expectations": [
+        "Cobre as dez dimensões do rubric quando aplicáveis.",
+        "Separa sintomas de causas e ordena o maior gap primeiro.",
+        "Não afirma que uma correção foi implementada sem diff ou render atual."
+      ],
+      "expected_skill": "design-director"
+    },
+    {
+      "id": "dd-11-native-image-route",
+      "prompt": "Crie uma foto editorial para o hero desta clínica veterinária; o CTA e todo o texto devem continuar em HTML. Execute com OPENAI_API_KEY ausente.",
+      "expected_output": "Direciona a foto ao image_gen nativo, mantém CTA/texto code-native e explica qualquer indisponibilidade sem pedir ou imprimir segredo.",
+      "expectations": [
+        "Escolhe raster apenas para a foto e HTML para texto/CTA.",
+        "Não exige OPENAI_API_KEY para o caminho nativo.",
+        "Não troca silenciosamente para CLI/API nem fixa um modelo no tool abstraction.",
+        "Inspeciona o asset e registra seu papel/proveniência."
+      ],
+      "expected_skill": "design-director"
+    },
+    {
+      "id": "dd-12-fidelity-override",
+      "prompt": "Crie uma landing page SaaS premium, sem gradiente, minimalista, usando o logotipo existente e sem inventar claims.",
+      "expected_output": "Segue os overrides explícitos, preserva o logo, define minimalismo com conteúdo suficiente e evita claims, gradientes e badges inventados.",
+      "expectations": [
+        "Trata a restrição sem gradiente como obrigatória.",
+        "Inspeciona e preserva o logotipo fornecido.",
+        "Não substitui minimalismo por uma tela vazia ou por um template genérico."
+      ],
+      "expected_skill": "design-director"
+    },
+    {
+      "id": "dd-13-game-routing",
+      "prompt": "Crie os assets visuais de um jogo: personagem, plataforma, coletável, perigo, cenário e HUD de pontuação, todos com a mesma linguagem visual.",
+      "expected_output": "Cria art bible e asset plan, roteia runtime/playtest e sprite pipeline aos especialistas, e mantém HUD/estado code-native.",
+      "expectations": [
+        "Define silhueta, paleta, escala, âncora, contraste e legibilidade em jogo.",
+        "Não implementa engine, física, colisão ou playtest como se fossem a responsabilidade desta skill.",
+        "Preserva transparência/alpha e testa assets no tamanho real."
+      ],
+      "expected_skill": "design-director"
+    },
+    {
+      "id": "dd-14-figma-routing",
+      "prompt": "Tenho um arquivo Figma e preciso transformar seus componentes em código mantendo tokens, estados e responsividade.",
+      "expected_output": "Seleciona a rota Figma-to-code disponível, pede contexto de design antes de implementar e entrega o contrato visual ao dono de frontend.",
+      "expectations": [
+        "Roteia operações Figma ao skill direcional instalado, sem inventar nome ou API.",
+        "Mantém Design Director como camada de intenção/aceitação, não como conector Figma.",
+        "Inclui estados, tokens e responsive behavior no handoff."
+      ],
+      "expected_skill": "design-director"
+    },
+    {
+      "id": "dd-15-ambiguous-context",
+      "prompt": "Deixa isso moderno e bonito.",
+      "expected_output": "Usa o contexto disponível para decidir se há superfície visual; pergunta apenas o que muda a direção e não converte todo pedido em gradiente, vidro ou cards.",
+      "expectations": [
+        "É sensível ao contexto: screenshot/página ativa design; arquivo Python não ativa design.",
+        "Expõe assumptions reversíveis em vez de fingir conhecer a marca.",
+        "Evita clichês de AI slop e preserva escopo."
+      ],
+      "expected_skill": null
+    },
+    {
+      "id": "dd-16-browser-blocked",
+      "prompt": "Você pode confirmar que esta tela está pixel-perfect? Não tenho a referência original e o Browser está indisponível.",
+      "expected_output": "Declara que a confirmação está bloqueada, oferece inspeção estática/brief de comparação e não reivindica pixel parity.",
+      "expectations": [
+        "Marca a evidência de screenshot/referência como BLOCKED ou NOT RUN.",
+        "Não diz que abriu, inspecionou ou comparou a tela.",
+        "Propõe o próximo passo seguro sem inventar artefatos."
+      ],
+      "expected_skill": "design-director"
+    },
+    {
+      "id": "dd-17-mobile-accessibility",
+      "prompt": "Redesenhe o fluxo de checkout mobile para ficar mais claro, com teclado, foco, erros de formulário e leitores de tela em mente.",
+      "expected_output": "Define fluxo mobile, hierarchy, tokens, semantic controls, focus/error behavior, reduced motion, touch targets e QA em viewport estreita/intermediária.",
+      "expectations": [
+        "Prioriza tarefa, reachability, teclado virtual, foco visível e recuperação de erro.",
+        "Inclui nomes/labels, ordem de headings, contraste e cues além de cor.",
+        "Não trata acessibilidade como apenas uma razão de contraste."
+      ],
+      "expected_skill": "design-director"
+    },
+    {
+      "id": "dd-18-visual-regression-positive",
+      "prompt": "Há uma regressão visual nesta tela desde o último deploy. Compare antes/depois e corrija o maior desvio sem mudar o comportamento do produto.",
+      "expected_output": "Executa ou encaminha renderização visual, cria fidelity ledger, preserva comportamento e faz uma segunda inspeção independente após a correção.",
+      "expectations": [
+        "Trata regressão visual como audit/QA, não como redesign amplo.",
+        "Compara imagens e estados atuais com evidência de viewport/contexto.",
+        "Preserva conteúdo, comportamento e design system não envolvidos."
+      ],
+      "expected_skill": "design-director"
+    },
+    {
+      "id": "dd-19-data-visualization-boundary",
+      "prompt": "Meu dashboard mostra gráficos enganosos porque as escalas e agregações estão erradas. Corrija a semântica dos dados e depois deixe a apresentação mais elegante.",
+      "expected_output": "Entrega semântica/encoding ao especialista de data-visualization e limita Design Director à hierarquia, marca, acessibilidade e QA visual posterior.",
+      "expectations": [
+        "Não decide sozinho uma codificação de dados potencialmente enganosa.",
+        "Separa correção semântica de refinamento visual.",
+        "Evita que estética masque erro analítico."
+      ],
+      "expected_skill": "design-director"
+    },
+    {
+      "id": "dd-20-package-handoff",
+      "prompt": "Analise e valide este pacote da skill design-director antes de eu instalá-lo.",
+      "expected_output": "Lê o pacote, executa os validadores disponíveis, inspeciona links/evals/metadata e reporta arquitetura, falhas, evidências e limitações sem autoaprovar.",
+      "expectations": [
+        "Verifica manifesto, frontmatter, referências, scripts, assets e evals.",
+        "Distingue validação estrutural de ativação/runtime e de qualidade visual.",
+        "Retorna problemas concretos e não trata a própria afirmação de PASS como evidência."
+      ],
+      "expected_skill": "design-director"
+    }
+  ]
+}
