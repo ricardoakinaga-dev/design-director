@@ -1,0 +1,71 @@
+{
+  "id": "B05-screenshot-reconstruction",
+  "category": "reconstruction",
+  "brief": {
+    "objective": "Reconstruct the supplied synthetic reference screen as semantic, responsive UI while preserving its observable hierarchy and copy without baking the screenshot into the implementation.",
+    "audience": "A reviewer comparing a working reconstruction with the supplied reference at native dimensions.",
+    "surface": "Northstar Relay command-center screen reconstructed from a synthetic reference frame.",
+    "primary_action": "Open route brief",
+    "acceptance_criteria": ["Major anchors, region order, proportions, text hierarchy, and visual relationships match at 1440x900.", "The implementation uses semantic HTML/CSS/components and does not use the reference as a full-screen background or flattened image.", "The reconstruction remains usable at 768px and 375px with deliberate transformations for dense regions.", "Observable copy and identity-neutral geometry are matched; inferred behavior is labeled rather than presented as reference fact.", "A fidelity ledger records geometry, typography, spacing, color, imagery, and state differences with evidence."]
+  },
+  "inputs": [
+    {
+      "id": "reference-frame",
+      "role": "reference",
+      "kind": "fixture",
+      "provenance": "repository-existing",
+      "path": "benchmarks/fixtures/reconstruction-reference.svg"
+    }
+  ],
+  "references": [
+    { "id": "reconstruction-composition", "role": "composition", "path": "benchmarks/fixtures/reconstruction-reference.svg", "provenance": "repository-existing", "notes": "Compare native dimensions, anchors, region order, and crop." },
+    { "id": "reconstruction-style", "role": "style", "path": "benchmarks/fixtures/reconstruction-reference.svg", "provenance": "repository-existing", "notes": "Use surface, border, type, and density relationships as evidence; do not assume hidden design tokens." },
+    { "id": "reconstruction-color", "role": "color", "path": "benchmarks/fixtures/reconstruction-reference.svg", "provenance": "repository-existing", "notes": "Match relationships and contrast, not merely sampled hex values." }
+  ],
+  "constraints": {
+    "scope": "reconstruction",
+    "must_include": ["Reference navigation rail, top bar, primary route brief, status summary, activity chart, and handoff table", "Native readable text and controls with the observed region order", "A comparison ledger at the reference viewport plus intermediate and mobile checks"],
+    "must_avoid": ["Using the entire reference as a background, screenshot, or canvas image", "Inventing below-the-fold screens or hidden behaviors as observed facts", "Replacing observable copy with lorem ipsum", "Changing product identity or adding effects to hide fidelity gaps"],
+    "technology": ["Semantic HTML/CSS/components", "Code-native layout and UI text", "SVG/raster only for visual content actually present in the reference"],
+    "accessibility": ["Use semantic landmarks, headings, buttons, and table semantics where applicable.", "Do not let fidelity justify inaccessible contrast, focus, labels, or reflow."],
+    "responsive": ["At 1440x900, match reference geometry and native crop before polish.", "At 768px, transform rail and dense table deliberately.", "At 375px, preserve primary status and route action in usable reading order."],
+    "notes": "Reference handling: the synthetic fixture supplies observable identity-neutral composition, style, and color evidence; it does not authorize copying hidden behavior or protected expression. Product specificity: preserve route-handoff vocabulary and command-center purpose, not a generic dark dashboard. Edit when reference relationship is correct but a local geometry/type/spacing/responsive discrepancy remains; regenerate structural decomposition only when it is wrong, never flatten the reference. Stop at threshold, no material correction, budget exhaustion, reference block, or marginal improvement."
+  },
+  "viewports": [
+    { "name": "reference", "width": 1440, "height": 900, "device": "desktop", "orientation": "landscape", "required": true },
+    { "name": "intermediate", "width": 768, "height": 900, "device": "tablet", "orientation": "landscape", "required": true },
+    { "name": "mobile", "width": 375, "height": 812, "device": "phone", "orientation": "portrait", "required": true }
+  ],
+  "states": [
+    { "id": "default", "description": "Reference-observable default screen.", "required": true },
+    { "id": "focus", "description": "Interactive controls expose visible keyboard focus.", "required": true },
+    { "id": "custom-selected-route", "description": "Selected route detail remains semantically usable.", "required": false },
+    { "id": "custom-empty-activity", "description": "Inferred empty state is labeled as an extension, not reference fact.", "required": false },
+    { "id": "custom-reduced-motion", "description": "Any motion is safely reduced.", "required": true }
+  ],
+  "regions": ["navigation", "top-bar", "route-brief", "status-summary", "activity", "handoff-table"],
+  "expected_artifacts": [
+    { "id": "reconstruction-implementation", "kind": "ui", "role": "semantic responsive reconstruction", "required": true, "format": "html-css-or-component" },
+    { "id": "reconstruction-reference-render", "kind": "render", "role": "native reference plus intermediate and mobile comparison renders", "required": true, "format": "png" },
+    { "id": "reconstruction-ledger", "kind": "ledger", "role": "fidelity ledger for navigation top-bar route-brief status and activity", "required": true, "format": "json" },
+    { "id": "reconstruction-critic", "kind": "critique", "role": "blinded independent visual critic report", "required": true, "format": "json" },
+    { "id": "reconstruction-score", "kind": "report", "role": "reference-fidelity and applicable-dimension quality score", "required": true, "format": "json" },
+    { "id": "reconstruction-final-decision", "kind": "report", "role": "evidence-backed final decision", "required": true, "format": "json" }
+  ],
+  "preservation_rules": {
+    "immutable": ["Observable reference copy, region order, primary action meaning, and native dimensions", "Distinction between observed facts and inferred behavior"],
+    "high_sensitivity": ["Major anchors, crop, proportions, typography hierarchy, and surface relationships", "Route-handoff vocabulary and status meaning"],
+    "flexible": ["Implementation primitives, hidden behavior, responsive transformation, and non-observable states"],
+    "forbidden_inference": ["Do not infer unseen routes, business rules, data truth, or brand ownership from a synthetic frame.", "Do not call the result pixel-perfect without native render comparison evidence."]
+  },
+  "quality_threshold": {
+    "overall_min": 90,
+    "aaa_min": 95,
+    "evidence_confidence_min": "HIGH",
+    "require_independent_critic": true,
+    "block_critical": true,
+    "block_high": true,
+    "required_gates": ["render", "inspection", "independent-critique", "responsive", "accessibility", "anti-slop"]
+  },
+  "iteration_budget": 3
+}

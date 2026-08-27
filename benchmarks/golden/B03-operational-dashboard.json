@@ -1,0 +1,72 @@
+{
+  "id": "B03-operational-dashboard",
+  "category": "dashboard",
+  "brief": {
+    "objective": "Design an operational dashboard that helps a dispatcher scan status, compare routes, filter work, inspect exceptions, and recover from empty or error states.",
+    "audience": "A field-operations dispatcher monitoring today's route handoffs under time pressure.",
+    "surface": "Responsive operational dashboard for Northstar Relay.",
+    "primary_action": "Review at-risk handoffs",
+    "acceptance_criteria": ["Status, primary KPI, trend context, table detail, and primary action have an intentional scan order.", "The table preserves comparison value with units, timestamps, sorting/filtering affordances, and readable alignment.", "Loading, empty, error, filtered, selected, and long-content states are designed rather than implied.", "Mobile preserves the primary task and status while transforming dense data deliberately.", "Charts communicate a decision and are not decorative filler."]
+  },
+  "inputs": [
+    {
+      "id": "operations-context",
+      "role": "brief",
+      "kind": "request",
+      "provenance": "repository-existing",
+      "content": "Northstar Relay dispatcher surface for field-operations handoffs. Units: handoffs, minutes, routes, proofs. Context: Today, local operations time. Fixture data must be labeled and never imply a live connection."
+    }
+  ],
+  "references": [],
+  "constraints": {
+    "scope": "new",
+    "must_include": ["Navigation, header, filters, KPI summary, decision-oriented trend/distribution view, route table, and action area", "At least one at-risk status with text or icon in addition to color", "Sort/filter feedback, selected-row detail, and recoverable error state", "A mobile detail path for rows or a deliberate horizontal comparison strategy"],
+    "must_avoid": ["Dashboard-as-landing-page composition", "Card-in-card nesting without semantic ownership", "Fake live metrics presented as production truth", "Decorative charts with no decision value", "Hiding required filters, error copy, table meaning, or status cues to fit mobile"],
+    "technology": ["Semantic HTML/CSS/components", "Accessible table or explicitly equivalent data view", "Code-native chart/SVG only when its metric is labeled"],
+    "accessibility": ["Use semantic table structure, names, focus, and status feedback for filter/sort controls.", "Pair status color with text/icon cues and test keyboard, zoom/reflow, and non-color meaning."],
+    "responsive": ["At 375px, keep status, primary action, and selected-row essential detail visible.", "At 768px, transform filters/columns without losing labels or units.", "At 1440px, support scanning without tiny type or unstructured card sprawl."],
+    "notes": "Data truth: use labeled fixture data or placeholders; never imply a live source, SLA, customer outcome, or guarantee. Product specificity: hierarchy and vocabulary must feel like a dispatcher tool for route handoffs, not analytics boilerplate. Performance: avoid decorative chart media and keep large content paginated/virtualized only when the product contract supports it. Edit when information architecture is correct but density, hierarchy, state feedback, or local responsive behavior needs correction; regenerate when scan/compare/inspect/act is structurally unsupported. Stop at threshold, no material correction, budget exhaustion, tool block, or marginal improvement."
+  },
+  "viewports": [
+    { "name": "mobile", "width": 375, "height": 900, "device": "phone", "orientation": "portrait", "required": true },
+    { "name": "intermediate", "width": 768, "height": 1024, "device": "tablet", "orientation": "portrait", "required": true },
+    { "name": "wide", "width": 1440, "height": 1000, "device": "desktop", "orientation": "landscape", "required": true }
+  ],
+  "states": [
+    { "id": "default", "description": "Dispatcher queue with labeled fixture data.", "required": true },
+    { "id": "loading", "description": "Loading state preserves layout and communicates status.", "required": true },
+    { "id": "empty", "description": "Empty queue explains the state and next action.", "required": true },
+    { "id": "error", "description": "Recoverable data error names the issue and retry path.", "required": true },
+    { "id": "custom-filtered", "description": "Filter context and result count are visible.", "required": true },
+    { "id": "custom-selected-row", "description": "Selected route detail has a clear return path.", "required": true },
+    { "id": "focus", "description": "Keyboard focus is visible on filters, rows, and actions.", "required": true },
+    { "id": "custom-disabled-action", "description": "Disabled action explains why it is unavailable.", "required": false },
+    { "id": "long-content", "description": "Long route names and values do not destroy alignment or meaning.", "required": true }
+  ],
+  "regions": ["navigation", "header", "filters", "kpi", "charts", "table", "actions", "states"],
+  "expected_artifacts": [
+    { "id": "dashboard-implementation", "kind": "ui", "role": "responsive operational dashboard", "required": true, "format": "html-css-or-component" },
+    { "id": "dashboard-render-set", "kind": "render", "role": "rendered evidence at mobile/intermediate/wide", "required": true, "format": "png" },
+    { "id": "dashboard-state-evidence", "kind": "report", "role": "loading empty error filter selection and focus evidence", "required": true, "format": "json" },
+    { "id": "dashboard-region-ledger", "kind": "ledger", "role": "navigation header filters KPI charts table actions and states ledger", "required": true, "format": "json" },
+    { "id": "dashboard-critic", "kind": "critique", "role": "blinded independent visual critic report", "required": true, "format": "json" },
+    { "id": "dashboard-score", "kind": "report", "role": "density usability and applicable-dimension quality score", "required": true, "format": "json" },
+    { "id": "dashboard-final-decision", "kind": "report", "role": "evidence-backed final decision", "required": true, "format": "json" }
+  ],
+  "preservation_rules": {
+    "immutable": ["Dispatcher workflow intent and primary action meaning", "Data units, status semantics, and timestamp context"],
+    "high_sensitivity": ["Table comparison hierarchy and route/handoff vocabulary", "Filter, sorting, selection, and recovery semantics", "At-risk status must not depend on color alone"],
+    "flexible": ["Chart form, navigation arrangement, density, visual theme, and mobile detail transformation"],
+    "forbidden_inference": ["Do not imply a live data source, SLA, customer outcome, or operational guarantee.", "Do not infer chart semantics from decoration; label metric and unit."]
+  },
+  "quality_threshold": {
+    "overall_min": 90,
+    "aaa_min": 95,
+    "evidence_confidence_min": "HIGH",
+    "require_independent_critic": true,
+    "block_critical": true,
+    "block_high": true,
+    "required_gates": ["render", "inspection", "independent-critique", "responsive", "accessibility", "anti-slop"]
+  },
+  "iteration_budget": 3
+}

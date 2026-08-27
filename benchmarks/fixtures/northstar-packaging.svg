@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+  <title id="title">Original Northstar field kit package identity reference</title>
+  <desc id="desc">A fictional warm-white field-kit carton with a navy front label, orange four-point star mark, and navy side panel.</desc>
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff7e9"/>
+      <stop offset="1" stop-color="#e8d9c0"/>
+    </linearGradient>
+    <linearGradient id="side" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#162f42"/>
+      <stop offset="1" stop-color="#0e2232"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="150%" height="160%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="18"/>
+      <feOffset dx="0" dy="24"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.2"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="1200" height="900" fill="#f3eee4"/>
+  <ellipse cx="617" cy="770" rx="390" ry="52" fill="#6d5947" opacity="0.15"/>
+  <g filter="url(#shadow)">
+    <path d="M364 178 L790 124 L958 214 L536 274 Z" fill="#fffaf0" stroke="#cfbea4" stroke-width="3"/>
+    <path d="M364 178 L536 274 V718 L364 620 Z" fill="url(#side)" stroke="#0d2130" stroke-width="3"/>
+    <path d="M536 274 L958 214 V660 L536 718 Z" fill="url(#paper)" stroke="#cfbea4" stroke-width="3"/>
+    <path d="M536 274 L958 214 L958 287 L536 350 Z" fill="#ed9c62" opacity="0.95"/>
+    <g transform="translate(622 356)">
+      <polygon points="90,0 109,68 180,90 109,111 90,180 69,111 0,90 69,68" fill="#ef9b5f"/>
+      <circle cx="90" cy="90" r="18" fill="#fff7e9"/>
+    </g>
+    <g font-family="Arial, Helvetica, sans-serif">
+      <text x="590" y="590" fill="#132d40" font-size="45" font-weight="700" letter-spacing="6">NORTHSTAR</text>
+      <text x="593" y="625" fill="#567080" font-size="15" letter-spacing="3">FIELD KIT / 01</text>
+      <text x="400" y="488" fill="#f9ddba" font-size="16" letter-spacing="3" transform="rotate(-13 400 488)">FIND YOUR LINE</text>
+      <text x="400" y="526" fill="#f9ddba" font-size="10" letter-spacing="2" transform="rotate(-13 400 526)">TOOLS FOR THE LONG WAY FORWARD</text>
+      <text x="756" y="680" fill="#8b7764" font-size="12" letter-spacing="2">NORTHSTAR / FIELD GOODS</text>
+    </g>
+  </g>
+</svg>

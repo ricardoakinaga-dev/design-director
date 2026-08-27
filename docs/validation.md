@@ -1,53 +1,98 @@
 # Validation record
 
-Run date: 2026-08-26. This record is evidence for the package itself; it is not a claim that a product UI was rendered.
+Run date: 2026-08-26. This record is evidence for the package and its
+contracts; it is not a claim that a product UI was rendered.
 
-## Gauntlet Result
+## Gauntlet result
 
 **Goal**
 
-Deliver a portable, skill-only `design-director` plugin that directs visual product work without duplicating specialist tool ownership.
+Evolve the existing skill-only `design-director` into a portable,
+evidence-driven visual quality system without duplicating specialist tool
+ownership or replacing working architecture.
 
-**Quality Bar**
+**Quality bar**
 
-DD-1 structural integrity: PASS. DD-3/4/5/10 static contracts: PASS. DD-2/8/9/11 are partially evidenced. DD-6/7 are not applicable to this package because no runnable product UI, reference screenshot, Figma file, or generated raster asset is included.
+Package-level structural and evidence-contract gates must pass. Product-level
+visual quality remains `BLOCKED`/`NOT RUN` because this repository contains no
+runnable product surface and the current host exposes no Browser/IAB or
+Playwright runtime.
 
-**Rounds**
+**Implemented rounds**
 
-Discovery/research → package build → static checks → independent critique → targeted fixes → integrated checks → fresh final critique.
-
-**Major gaps discovered**
-
-- The workspace contains a skill package, not a runnable product surface; rendered visual QA, browser interaction, Figma inspection, and raster-generation behavior cannot be proven here.
-- The first official `plugin-eval` benchmark was blocked before model execution by an external `max` reasoning-effort/model mismatch. A retry with an announced model remained without output and was stopped after the process showed no progress; its logs remain in the disposable `/tmp` run directory.
+Discovery and baseline → official capability research → quality-bar freeze →
+parallel contract/fixture/protocol/auditor workstreams → central contract
+reconciliation → decodable-render hardening → integrated validation →
+independent read-only review → contract remediation → final independent review.
 
 **Major improvements**
 
-- Added a skill-only manifest, direct-skill metadata, 24 focused references, 20 forward evals, deterministic package/eval/contrast/asset checks, worked examples, and a local marketplace template.
-- Added identity-lock, medium-selection, specialist-boundary, anti-slop, responsive, accessibility, degradation, and visual-QA contracts.
-- Corrected the 0–100 score formula, documented metadata precedence and marketplace auth semantics, and made strict asset auditing reject empty/undecodable files.
+- Added seven golden machine-readable benchmarks (B01–B07) with original
+  provenance-labeled SVG fixtures and a directory validator.
+- Added benchmark, run, critic, and region-ledger schemas; deterministic
+  validation binds artifacts, renders, inspections, scores, critiques,
+  iterations, evidence, and final decisions.
+- Added blinded critic protocol with explicit `SELF`, `SEPARATED_SELF`, `PEER`,
+  and `INDEPENDENT` levels, packet digest validation, builder separation, and
+  evidence-gated approval.
+- Added applicable-dimension scoring, normalized weights, evidence confidence,
+  critical/high blockers, region gaps, adaptive budget/stop policy, gate aliases,
+  and an AAA eligibility gate.
+- Added native image-render decoding and viewport/DPR checks, artifact
+  completeness and hash checks, region/state coverage, a dependency-free PNG
+  comparator, asset/token auditing, and frontend accessibility, performance,
+  typography, and copy-stress evidence gates.
+- Preserved progressive disclosure: `SKILL.md` remains concise and routes to
+  focused references; native image generation remains the default specialist
+  path and no API key is required by the package.
 
 **Verification performed**
 
-- Official plugin validator: PASS.
-- Official skill validator: PASS.
-- Local package validator: PASS (`24` references, `20` evals).
-- Eval smoke catalog: PASS (`20/20` required IDs).
-- Helper tests: PASS (`7` tests, including truncated PNG, invalid-CRC PNG, and malformed SVG rejection).
-- Contrast known-good pair: PASS (`16.31:1`). Known-bad pair: correctly rejected (`4.48:1` against `4.5`).
-- SVG XML parse and strict asset audit: PASS; empty/malformed/undecodable fixtures: correctly rejected.
-- Fresh `codex exec` forward test with `$design-director`: PASS for automatic discovery and landing-page routing; the model selected HTML/CSS, preserved no-claims/no-gradient constraints, and marked absent render evidence blocked.
-- Fresh read-only positive/negative prompts: PASS for banner medium selection and SQL/backend non-activation.
-- Static `plugin-eval analyze`: completed with a conservative budget warning because it sums all deferred references/evals/helpers; this is an upper-bound heuristic for a progressively loaded package, not a runtime failure.
+- Official plugin validator: `PASS`.
+- Official skill validator: `PASS`.
+- Local package validator: `PASS` (`29` references, `28` evals); it also
+  validates every golden benchmark when the repository benchmark directory is
+  present.
+- Eval smoke catalog: `PASS` (`28/28` required IDs).
+- Helper and contract tests: `PASS` (`64` tests), including missing evidence,
+  critical/high blocker precedence, independence and digest checks, region
+  coverage, stale iterations, artifact completeness, malformed assets, missing
+  manifest assets, non-decodable/nonvisual renders, and native PNG comparison.
+- Golden benchmark directory: `PASS` (`7/7` specs; all referenced fixtures
+  resolve).
+- Strict asset audit with the repository manifest: `PASS` (`5` assets, zero
+  findings); contrast known-good/bad regression remains covered.
+- JSON parsing, Python compilation, package links, and `git diff --check`:
+  `PASS`.
+- Official `plugin-eval` static conventions were researched and the local
+  package remains dependency-free; model-backed external evaluation is not
+  claimed as a result of this run.
 
-**Final Critic**
+## Independent critic
 
-Fresh read-only integration critique performed after the CRC-fixture and metadata-documentation fixes: `CONDITIONAL PASS`, with no mandatory correction. The critic confirmed the malformed-asset coverage, `dd-19` boundary, score normalization, metadata/`ON_INSTALL` documentation, and honest runtime labels. Runtime visual criteria remain explicitly `NOT RUN`/`BLOCKED` because the package intentionally contains no application artifact.
+Independent read-only reviewers received only the acceptance packet and
+integrated working tree, without builder rationale or self-assigned scores.
+The first review found stale control-plane state and under-specified
+execution/report provenance; those findings were remediated with current-render
+coverage, final-chain bindings, artifact digests, complete quality-report
+consumption, non-empty evidence checks and aligned examples/tests. A fresh
+second review (`01a040ef-6669-7012-b31c-f7e7480ddc17`) returned
+`CONDITIONAL PASS`, `84/100`, confidence `MEDIUM`, with no Critical or remaining
+implementation High finding. This is a machine-auditable separation signal,
+not cryptographic proof of epistemic independence. The record keeps
+package-level acceptance separate from product-level visual QA.
 
-**Remaining limitations**
+## Remaining limitations
 
-No live Browser/IAB, Figma, image-generation, frontend implementation, game runtime, data-visualization, reference-image, font, or screen-reader run was available in this package workspace. Install the optional specialist capabilities and run their real artifact checks for those claims.
+No live Browser/IAB, Playwright, Figma connector, frontend app, game runtime,
+screen-reader run, native image-generation output, or user-supplied reference
+target was available. Therefore no product screenshot, pixel-fidelity claim,
+interaction claim, or visual AAA approval is asserted. A capable host must
+execute the golden packet and bind real artifacts, screenshots, states,
+inspections, and a separated critic before promoting a product result.
 
-**Final verdict**
+## Current verdict
 
-CONDITIONAL PASS — package and routing contracts are validated; product-level visual quality and external specialist integration require a real target artifact and available capabilities.
+`CONDITIONAL PASS` for the portable package/harness after the final validator
+matrix and independent review; `BLOCKED` for live product-level visual
+validation.

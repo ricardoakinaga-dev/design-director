@@ -1,0 +1,66 @@
+{
+  "id": "B06-product-brand-identity",
+  "category": "product-brand",
+  "brief": {
+    "objective": "Create a product/brand visual that places the supplied Northstar package in a new campaign context while preserving identity and package truth.",
+    "audience": "A brand reviewer checking whether a campaign concept still represents the supplied product accurately.",
+    "surface": "Product campaign key visual with responsive crop and an optional code-native caption layer.",
+    "primary_action": "See the field kit",
+    "acceptance_criteria": ["Northstar wordmark, star mark, package proportions, front-label hierarchy, and core palette remain faithful.", "The product remains the focal subject and is not obscured by invented props, effects, or copy.", "The context changes composition or environment without altering product identity.", "Desktop and mobile crops preserve package, label, and CTA safe zones.", "Generated or edited assets record provenance and distinguish immutable identity from flexible art direction."]
+  },
+  "inputs": [
+    { "id": "northstar-package", "role": "asset", "kind": "fixture", "provenance": "repository-existing", "path": "benchmarks/fixtures/northstar-packaging.svg" },
+    { "id": "brand-brief", "role": "brief", "kind": "request", "provenance": "repository-existing", "content": "Preserve fictional Northstar package identity; primary CTA: See the field kit. Change setting and composition only within the identity lock." }
+  ],
+  "references": [
+    { "id": "package-identity", "role": "identity", "path": "benchmarks/fixtures/northstar-packaging.svg", "provenance": "repository-existing", "notes": "Immutable reference for wordmark, star mark, package proportions, and front-label hierarchy." },
+    { "id": "package-material", "role": "material", "path": "benchmarks/fixtures/northstar-packaging.svg", "provenance": "repository-existing", "notes": "Use paperboard/fold cues as evidence; do not add a different container type." },
+    { "id": "package-color", "role": "color", "path": "benchmarks/fixtures/northstar-packaging.svg", "provenance": "repository-existing", "notes": "Preserve navy, warm white, and signal orange relationship unless explicitly changed." }
+  ],
+  "constraints": {
+    "scope": "asset-preserving",
+    "must_include": ["Supplied Northstar package as hero subject", "Explicit identity lock and provenance record", "Purposeful environment/material context", "Crop-safe mobile composition and readable code-native CTA"],
+    "must_avoid": ["Redrawing or mutating wordmark/star mark", "Changing package proportions, label hierarchy, or product category", "Invented claims, certification marks, review badges, or packaging copy", "Overlays, glare, blur, or crop that hide identity details", "Treating style reference as permission to change the product"],
+    "technology": ["Native image generation/editing or existing approved asset for the visual", "HTML/CSS/SVG for exact campaign copy and CTA"],
+    "accessibility": ["Keep required campaign copy outside raster when possible.", "Provide meaningful alt text or decorative designation by role.", "Maintain contrast and focus for CTA layer."],
+    "responsive": ["At 375px, keep package silhouette and wordmark readable with a safe CTA area.", "At 768px, preserve product focal hierarchy through crop.", "At 1440px, show intended material/context without excessive empty space."],
+    "notes": "Identity lock: immutable NORTHSTAR wordmark, four-point star mark, package proportions, front-label hierarchy, and navy/warm-white/orange relationship; high sensitivity includes silhouette, label legibility, fold/edge geometry, and contrast; flexible includes setting, surface, lighting, angle, shadow, and crop; forbidden inference includes claims, logo variants, package sizes, certifications, ingredients, and specifications. Product specificity must survive logo removal through silhouette, label system, material, and field-kit context. Edit when identity/composition are correct and change is local; regenerate when identity drifts, product is structurally wrong, or legibility fails. Stop at threshold, identity risk, no material correction, budget exhaustion, tool block, or marginal improvement."
+  },
+  "viewports": [
+    { "name": "mobile", "width": 375, "height": 812, "device": "phone", "orientation": "portrait", "required": true },
+    { "name": "intermediate", "width": 768, "height": 900, "device": "tablet", "orientation": "landscape", "required": true },
+    { "name": "wide", "width": 1440, "height": 900, "device": "desktop", "orientation": "landscape", "required": true }
+  ],
+  "states": [
+    { "id": "default", "description": "Product visual with identity intact and supplied CTA layer.", "required": true },
+    { "id": "loading", "description": "Asset loading preserves identity-safe layout and truthfulness.", "required": true },
+    { "id": "focus", "description": "Code-native CTA exposes visible focus.", "required": true },
+    { "id": "custom-reduced-motion", "description": "Motion is reduced without changing identity or meaning.", "required": true },
+    { "id": "custom-cropped-mobile", "description": "Mobile crop preserves wordmark, package silhouette, and safe zone.", "required": true }
+  ],
+  "regions": ["product", "context", "copy-cta", "crop", "identity"],
+  "expected_artifacts": [
+    { "id": "identity-lock", "kind": "report", "role": "immutable high-sensitivity flexible and forbidden identity contract", "required": true, "format": "json" },
+    { "id": "product-visual", "kind": "asset", "role": "product campaign visual", "required": true, "format": "png-or-svg" },
+    { "id": "product-render-set", "kind": "render", "role": "rendered evidence at mobile/intermediate/wide", "required": true, "format": "png" },
+    { "id": "asset-acceptance", "kind": "report", "role": "identity proportions label crop safe-zone provenance and format inspection", "required": true, "format": "json" },
+    { "id": "identity-critic", "kind": "critique", "role": "blinded independent identity and visual critic report", "required": true, "format": "json" },
+    { "id": "product-final-decision", "kind": "report", "role": "evidence-backed final decision", "required": true, "format": "json" }
+  ],
+  "preservation_rules": {
+    "immutable": ["NORTHSTAR wordmark and four-point star mark", "Package silhouette, proportions, front-label hierarchy, and identity palette", "Exact supplied campaign copy and CTA meaning"],
+    "high_sensitivity": ["Product legibility at native display size", "Label/logo contrast, orientation, edge geometry, and provenance"],
+    "flexible": ["Environment, surface, lighting direction, props, crop, and code-native caption layout"],
+    "forbidden_inference": ["Do not invent product facts, packaging variants, legal marks, or brand guidelines.", "Do not use style, lighting, or composition inspiration to override identity references."]
+  },
+  "quality_threshold": {
+    "overall_min": 92,
+    "aaa_min": 95,
+    "evidence_confidence_min": "HIGH",
+    "require_independent_critic": true,
+    "block_critical": true,
+    "block_high": true,
+    "required_gates": ["render", "inspection", "independent-critique", "responsive", "accessibility", "identity", "performance", "anti-slop"]
+  },
+  "iteration_budget": 4
+}

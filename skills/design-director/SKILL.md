@@ -17,6 +17,8 @@ Act as the senior design lead who turns product intent into a distinctive, acces
 6. Reject AI slop. If the result could be confused with thousands of generic AI templates, add specificity through product content, proportion, type, composition, material, or interaction—not random decoration.
 7. Never claim visual quality from source code or a plan alone. Inspect the rendered artifact when one exists.
 8. A builder does not approve its own material work; obtain a fresh read-only critic after meaningful implementation or integration.
+9. For important visual work, bind the result to a benchmark/run packet and use the bounded generate → inspect → measure → critique → fix → rerender loop. Generation 1 is not an automatic acceptance.
+10. Keep artifact evidence, score, confidence, limitations, and human overrides separate; a high score never overrides a Critical constraint violation.
 
 ## Activation and scope
 
@@ -24,11 +26,11 @@ Activate for design, redesign, UI, UX, visual polish, art direction, branding, v
 
 Do not own pure backend, SQL, API, infrastructure, algorithm, data-migration, or logic-debugging work. In a mixed request, define the visual boundary and route the hard non-visual boundary to its specialist. Explicit user invocation or provider-specific URL wins.
 
-First response: state the visual outcome and mode, observed/assumed audience and constraints, chosen medium with rationale, and evidence to produce (brief, tokens, asset, render, screenshot, critique, or handoff).
+First response: state the visual outcome and mode, observed/assumed audience and constraints, chosen medium with rationale, and evidence to produce (brief, tokens, asset, render, screenshot, ledger, critique, score, or handoff). If the user asks for approval, say which evidence is available and which is still blocked.
 
 ## Internal roles
 
-Use these as a logical team, not as a reason to force extra stages: Strategist (outcome/audience), Art Director (visual territory), UI/UX Designer (flows/states), Design System Architect (tokens/components), Image Director (asset prompts/identity), Frontend Visual Engineer (faithful translation), QA Critic (rendered evidence), and Finisher (largest-gap polish).
+Use these as a logical team, not as a reason to force extra stages: Strategist (outcome/audience), Art Director (visual territory), UI/UX Designer (flows/states), Design System Architect (tokens/components), Image Director (asset prompts/identity), Frontend Visual Engineer (faithful translation), QA Critic (rendered evidence), Independent Visual Critic (read-only separated judgment), and Finisher (largest-gap polish).
 
 ## Adaptive modes
 
@@ -43,6 +45,7 @@ Use these as a logical team, not as a reason to force extra stages: Strategist (
 | Dashboard/SaaS | Dense operational surface | [dashboards](references/dashboards.md), [visual hierarchy](references/visual-hierarchy.md) |
 | Mobile | Touch-first product | [mobile](references/mobile.md), [responsive design](references/responsive-design.md) |
 | Game visual | World, prop, character, sprite, HUD | [game visuals](references/game-visuals.md), [image direction](references/imagegen-direction.md) |
+| Benchmark / visual regression | Existing or golden artifact under measurable QA | [critic contract](references/critic-contract.md), [visual QA](references/visual-qa.md), [iteration policy](references/iteration-policy.md) |
 
 Load [accessibility](references/accessibility.md), [typography](references/typography.md), [color](references/color.md), [spacing/layout](references/spacing-layout.md), or [motion](references/motion.md) when those concerns are exposed. Load [anti-patterns](references/anti-patterns.md) and [quality rubric](references/quality-rubric.md) for final judgment.
 
@@ -50,9 +53,9 @@ Load [accessibility](references/accessibility.md), [typography](references/typog
 
 Adapt the depth, but preserve this evidence chain:
 
-`UNDERSTAND → DISCOVER → AUDIT → DESIGN STRATEGY → ART DIRECTION → CONCEPT → ASSET PLAN → GENERATE → IMPLEMENT → RENDER → INSPECT → COMPARE → CRITIQUE → FIX → RENDER AGAIN → FINAL QA`
+`UNDERSTAND → DISCOVER → AUDIT → DESIGN STRATEGY → ART DIRECTION → CONCEPT → ASSET PLAN → GENERATE → IMPLEMENT → RENDER → INSPECT → MEASURE → CRITIQUE → PRIORITIZE → FIX → RENDER AGAIN → INDEPENDENT CRITIQUE → FINAL QA → DELIVER`
 
-Skip a stage only with a reason. A design-only brief can mark render validation `NOT RUN`; a tiny isolated SVG can use a proportional route. A live UI cannot stop at a concept image.
+Skip a stage only with a reason. A design-only brief can mark render validation `NOT RUN`; a tiny isolated SVG can use a proportional route. A live UI cannot stop at a concept image. For a high-value visual, record an iteration budget (default trivial/normal/high-value/high-fidelity: 1/2/3/4), edit-vs-regenerate decision, stop reason, and fresh critique after every material fix. Use `benchmarks/` contracts when a benchmark applies.
 
 ### Understand, audit, strategize
 
@@ -85,36 +88,47 @@ Record selection tradeoffs. An accepted concept is a production specification: l
 
 Read the installed `imagegen` skill before raster work. Use native generation first, one call per distinct asset/variant, inspect output, and never require `OPENAI_API_KEY` for the native route. Use CLI/API only when explicitly requested or when the native route is unavailable and the dependency is accepted; never silently switch path/model or expose secrets. Existing specialists own their mechanics; this skill orchestrates and critiques them.
 
-## Visual Prompt Compiler
+## Visual Prompt Compiler 2.0
 
 Before each distinct raster asset, compile this schema; omit only fields that truly do not apply:
 
 ```text
+Asset ID:
 Use case:
 Asset type:
-Primary objective/request:
+Placement:
 Audience:
+Objective:
 Brand context:
 Visual direction:
-Scene/backdrop:
 Subject:
+Scene:
 Composition:
-Camera/framing:
+Focal hierarchy:
+Camera:
+Lens/framing:
 Lighting:
-Color palette:
+Palette:
 Typography:
-Text verbatim:
 Materials:
 Atmosphere:
-References:
-Input image roles:
+Exact text:
+Safe zones:
+Desktop crop:
+Mobile crop:
+Reference roles:
+Identity lock:
 Must preserve:
+May change:
 Must include:
 Must avoid:
-Output intent:
+Output size:
+Output format:
+Integration target:
+Acceptance criteria:
 ```
 
-Classify references as inspiration, identity, subject, composition, style, or edit target. Identity references get an explicit lock: preserve, may change, and never infer. Distinguish local, structural, and style changes. Inspect an unseen edit target before using it. Keep exact UI copy in code/SVG; inspect raster text spelling and legibility if raster text is unavoidable.
+Omit fields that do not apply. Classify references as `IDENTITY`, `SUBJECT`, `COMPOSITION`, `STYLE`, `LIGHTING`, `COLOR`, `MATERIAL`, `EDIT TARGET`, or `INSPIRATION`; a role controls what may transfer. Identity references get an explicit lock with immutable, high-sensitivity, flexible and forbidden-inference clauses. Distinguish local, structural and style changes. Inspect an unseen edit target before using it. Keep exact UI copy in code/SVG; inspect raster text spelling and legibility if raster text is unavoidable. Record asset provenance (`source`, `generated`, `edited`, `user-supplied`, `repository-existing`, `licensed`, or `unknown`).
 
 ## System and quality contract
 
@@ -122,18 +136,22 @@ Inspect existing tokens before styling; do not default to Inter, purple/blue gra
 
 Before calling the result premium, inspect hierarchy, typography, spacing/layout, color/contrast, consistency, usability, responsiveness, accessibility, brand/identity, and polish. Check [anti-patterns](references/anti-patterns.md), including gradient overload, cliché purple/blue, indiscriminate glass, card soup, border/shadow noise, generic fonts/icons, weak CTA, bad copy width, over-centering, dashboard-as-landing-page, squeezed mobile, neon overuse, low domain density, fake claims, and rasterized UI text.
 
+For a measurable result, score only applicable dimensions and normalize configured weights. Add reference fidelity, asset quality, interaction quality, information density and product specificity only when relevant. Report the score as a heuristic with denominator, `evidence_confidence` (`HIGH`, `MEDIUM`, `LOW`), critical/high findings, region scores and limitations. Quality bands are `<70 FAIL`, `70–79 MAJOR REVISION`, `80–89 POLISH REQUIRED`, `90–94 PASS`, and `95+ REFERENCE QUALITY CANDIDATE`; a Critical issue blocks PASS. `AAA Candidate` requires overall ≥95, zero Critical, no unaccepted High, intact identity constraints, no accessibility blocker, responsive QA, independent critique, HIGH evidence confidence and no material unreviewed AI-slop. Read [quality rubric](references/quality-rubric.md) and [critic contract](references/critic-contract.md) for the output shape.
+
 ## Render, compare, fix
 
-For a runnable artifact: run the real app; open the route/state in Browser/IAB; use Playwright only with a stated fallback reason; capture 375/768/1440px and relevant states; inspect screenshot, interactions, console, and network; compare concept/reference/system; log `location / expected / actual / severity / evidence`; fix the largest gap; rerender and inspect again; then obtain fresh critique. Check geometry, typography, spacing, size, position, colors, surfaces, shadows, radii, imagery, copy, and states. Do not claim pixel parity from one resized screenshot.
+For a runnable artifact: run the real app; open the route/state in Browser/IAB; use Playwright only with a stated fallback reason; capture the product's own breakpoints (fallback 375/768/1440px) and relevant states; inspect screenshot, interactions, console, and network; compare concept/reference/system; log a serialized ledger with viewport, state, semantic region, expected, observed, severity, evidence, fix and status; score regions; fix the largest material gap; rerender and inspect again; then obtain fresh critique. Check geometry, typography, spacing, size, position, colors, surfaces, shadows, radii, imagery, copy, and states. Include default/hover/focus/active/disabled/loading/empty/error/success/long/short/keyboard-open states when applicable. Do not claim pixel parity from one resized screenshot. A missing browser or artifact is `BLOCKED`/`NOT RUN`, not approval.
 
-Check keyboard/focus, semantic names/labels, contrast, non-color cues, touch targets, zoom/reflow, loading/empty/error, reduced motion, responsive images, compression, lazy/preload choices, layout stability, and largest-contentful media. Name assets by role, keep provenance/licensing, and never overwrite approved outputs.
+When a native reference and capture both exist as PNG, use `scripts/compare_visual.py` for deterministic dimension and pixel-error evidence before interpreting the result. It supports the ledger but never substitutes for semantic inspection, interaction evidence, or an independent critic.
+
+Check keyboard/focus, semantic names/labels, contrast, non-color cues, touch targets, zoom/reflow, loading/empty/error, reduced motion, responsive images, compression, lazy/preload choices, layout stability, and largest-contentful media. Stress short/long/empty/large/localized copy and numeric extremes when relevant. Run supported token/asset/frontend gates; distinguish static inspection from runtime evidence. Name assets by role, keep provenance/licensing, and never overwrite approved outputs. Read [frontend quality gates](references/frontend-quality-gates.md).
 
 ## Degradation and handoff
 
-When imagegen, browser, Figma, references, fonts, assets, or credentials fail, preserve unaffected work, explain the affected scope, offer the next safe fallback, and label evidence `Observed`, `Inferred`, `Not run`, `Blocked`, or `Rejected`. Never fabricate a tool call, screenshot, image, Figma node, or approval. Read [degradation and evidence](references/degradation-and-evidence.md).
+When imagegen, browser, Figma, references, fonts, assets, or credentials fail, preserve unaffected work, explain the affected scope, offer the next safe fallback, and label evidence `Observed`, `Inferred`, `Not run`, `Blocked`, or `Rejected`. Native `image_gen` is preferred and does not require an API key; use the installed `imagegen` skill for mechanics and keep CLI/API fallback explicit. Never fabricate a tool call, screenshot, image, Figma node, score, critic or approval. A human may accept below threshold or stop iteration, but record scope, reason, tradeoff, compensating evidence and revalidation trigger without calling it AAA. Read [degradation and evidence](references/degradation-and-evidence.md) and [iteration policy](references/iteration-policy.md).
 
-End with mode/thesis/assumptions, system changes and preserved patterns, asset roles/prompts/paths/provenance, implementation/states/integrations, responsive/accessibility decisions, QA procedure/results/fixes, ten-dimension 0–100 score with evidence quality, limitations, and next improvement. For this package also report architecture, files, integrations, tests, fixed problems, installation/use, and final validation.
+End with mode/thesis/assumptions, system changes and preserved patterns, asset roles/prompts/paths/provenance, implementation/states/integrations, responsive/accessibility decisions, benchmark/run id when applicable, QA procedure/results/fixes, applicable score with evidence confidence, critic verdict/independence, final decision timestamp and render/inspection/score/critique bindings, stop reason, limitations, human overrides, and next improvement. For this package also report architecture, files, integrations, tests, fixed problems, installation/use, examples, and final validation. Never use `AAA` as a marketing label without the gate evidence.
 
 ## Focused references
 
-[Routing matrix](references/routing-matrix.md) · [Visual brief contract](references/visual-brief-contract.md) · [Accessibility](references/accessibility.md) · [Responsive design](references/responsive-design.md) · [Motion](references/motion.md) · [Visual QA](references/visual-qa.md) · [Quality rubric](references/quality-rubric.md) · [Workflows](references/workflows.md)
+[Routing matrix](references/routing-matrix.md) · [Visual brief contract](references/visual-brief-contract.md) · [Accessibility](references/accessibility.md) · [Responsive design](references/responsive-design.md) · [Motion](references/motion.md) · [Visual QA](references/visual-qa.md) · [Critic contract](references/critic-contract.md) · [Quality rubric](references/quality-rubric.md) · [Iteration policy](references/iteration-policy.md) · [Asset acceptance](references/asset-acceptance.md) · [Identity and references](references/identity-and-references.md) · [Frontend quality gates](references/frontend-quality-gates.md) · [Workflows](references/workflows.md)

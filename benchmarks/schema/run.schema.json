@@ -1,0 +1,447 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ricardoakinaga-dev/design-director/benchmarks/schema/run.schema.json",
+  "title": "Design Director visual benchmark run",
+  "description": "Evidence packet for artifact, render, inspection, score, critique, iteration, and final decision stages.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "run_id",
+    "benchmark_id",
+    "execution",
+    "artifacts",
+    "renders",
+    "inspections",
+    "scores",
+    "critiques",
+    "iterations",
+    "ledger",
+    "iteration_budget",
+    "final_decision"
+  ],
+  "properties": {
+    "schema_version": {"type": "string", "const": "1"},
+    "run_id": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+    "benchmark_id": {"type": "string", "pattern": "^B[0-9]{2}-[a-z0-9]+(?:-[a-z0-9]+)*$"},
+    "execution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "mode", "started_at", "completed_at", "tooling", "procedure", "result", "artifact_ids", "evidence"],
+      "properties": {
+        "status": {"type": "string", "enum": ["complete", "partial", "blocked", "not-run"]},
+        "mode": {"type": "string", "enum": ["native", "browser", "manual", "hybrid"]},
+        "started_at": {"type": "string", "minLength": 1},
+        "completed_at": {"type": "string", "minLength": 1},
+        "tooling": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+        "procedure": {"type": "string", "minLength": 1},
+        "result": {"type": "string", "minLength": 1},
+        "artifact_ids": {"type": "array", "minItems": 1, "items": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"}},
+        "evidence": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+        "limitations": {"type": "array", "items": {"type": "string", "minLength": 1}}
+      }
+    },
+    "artifacts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/artifact"}
+    },
+    "renders": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/render"}
+    },
+    "inspections": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/inspection"}
+    },
+    "scores": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/score"}
+    },
+    "critiques": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/critique"}
+    },
+    "iterations": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/iteration"}
+    },
+    "ledger": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/ledger-entry"}
+    },
+    "iteration_budget": {"$ref": "#/$defs/iteration-budget"},
+    "human_override": {"$ref": "#/$defs/human-override"},
+    "gates": {"$ref": "#/$defs/gates"},
+    "metadata": {"type": "object"},
+    "notes": {"type": "array", "items": {"type": "string"}},
+    "final_decision": {"$ref": "#/$defs/final-decision"}
+  },
+  "$defs": {
+    "path": {"type": "string", "minLength": 1},
+    "viewport": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["width", "height"],
+        "properties": {
+          "name": {"type": "string", "minLength": 1},
+          "width": {"type": "integer", "minimum": 240, "maximum": 7680},
+          "height": {"type": "integer", "minimum": 320, "maximum": 4320},
+        "device": {"type": "string", "minLength": 1},
+        "orientation": {"type": "string", "enum": ["portrait", "landscape", "responsive"]},
+        "dpr": {"type": "number", "minimum": 0.5, "maximum": 8},
+        "route": {"type": "string", "minLength": 1}
+      }
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "path", "kind", "role", "provenance", "status"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+        "path": {"$ref": "#/$defs/path"},
+        "kind": {"type": "string", "minLength": 1},
+        "role": {"type": "string", "minLength": 1},
+        "provenance": {"type": "string", "enum": ["source", "generated", "edited", "user-supplied", "repository-existing", "licensed", "unknown"]},
+        "sha256": {"type": "string", "pattern": "^[a-fA-F0-9]{64}$"},
+        "status": {"type": "string", "enum": ["produced", "partial", "missing", "blocked"]}
+      }
+    },
+    "render": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "artifact_id", "path", "viewport", "state", "format", "sha256", "captured_at", "evidence"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+        "artifact_id": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+        "path": {"$ref": "#/$defs/path"},
+        "viewport": {"$ref": "#/$defs/viewport"},
+        "state": {"type": "string", "minLength": 1},
+        "format": {"type": "string", "const": "png"},
+        "sha256": {"type": "string", "pattern": "^[a-fA-F0-9]{64}$"},
+        "evidence": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+        "captured_at": {"type": "string", "minLength": 1},
+        "tool": {"type": "string", "minLength": 1}
+      }
+    },
+    "inspection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "render_id", "method", "status", "inspected_at", "evidence", "findings"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+        "render_id": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+        "method": {"type": "string", "enum": ["browser", "image-inspection", "human", "automated", "hybrid"]},
+        "status": {"type": "string", "enum": ["pass", "fail", "partial", "not-run", "blocked"]},
+        "inspected_at": {"type": "string", "minLength": 1},
+        "evidence": {"type": "array", "items": {"type": "string", "minLength": 1}},
+        "findings": {"type": "array", "items": {"$ref": "#/$defs/finding"}},
+        "limitations": {"type": "array", "items": {"type": "string", "minLength": 1}}
+      }
+    },
+    "score": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "inspection_id", "scored_at", "dimensions"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+        "inspection_id": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+        "scored_at": {"type": "string", "minLength": 1},
+        "dimensions": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {"type": "number", "minimum": 0, "maximum": 10}
+        },
+        "applicable_dimensions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "weights": {
+          "type": "object",
+          "additionalProperties": {"type": "number", "exclusiveMinimum": 0}
+        },
+        "overall": {"type": "number", "minimum": 0, "maximum": 100},
+        "regions": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/region-score"}
+        },
+        "source": {"type": "string", "enum": ["critic", "human", "automated", "hybrid"]}
+      }
+    },
+    "finding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "severity", "description", "location", "evidence", "status"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "severity": {"type": "string", "enum": ["critical", "high", "medium", "low", "polish"]},
+        "description": {"type": "string", "minLength": 1},
+        "location": {"type": "string", "minLength": 1},
+        "evidence": {"type": "array", "items": {"type": "string", "minLength": 1}},
+        "status": {"type": "string", "enum": ["open", "fixed", "accepted", "not-run", "blocked"]}
+      }
+    },
+    "critique": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "inspection_id",
+        "created_at",
+        "reviewer_id",
+        "independent",
+        "blinded",
+        "independence",
+        "verdict",
+        "confidence",
+        "evidence_confidence",
+        "evidence_quality",
+        "blind_packet",
+        "reviewer_provenance",
+        "findings",
+        "top_corrections",
+        "constraint_violations",
+        "evidence_missing"
+      ],
+      "properties": {
+        "id": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+        "inspection_id": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+        "created_at": {"type": "string", "minLength": 1},
+        "reviewer_id": {"type": "string", "minLength": 1},
+        "independent": {"type": "boolean"},
+        "blinded": {"type": "boolean"},
+        "independence": {"type": "string", "enum": ["SELF", "SEPARATED_SELF", "PEER", "INDEPENDENT"]},
+        "verdict": {"type": "string", "enum": ["PASS", "CONDITIONAL PASS", "FAIL", "BLOCKED"]},
+        "overall_score": {"type": ["number", "null"], "minimum": 0, "maximum": 100},
+        "confidence": {"type": "string", "enum": ["HIGH", "MEDIUM", "LOW"]},
+        "evidence_confidence": {"type": "string", "enum": ["HIGH", "MEDIUM", "LOW"]},
+        "evidence_quality": {"type": "string", "enum": ["HIGH", "MEDIUM", "LOW", "NONE"]},
+        "blind_packet": {"$ref": "#/$defs/blind-packet"},
+        "reviewer_provenance": {"$ref": "#/$defs/reviewer-provenance"},
+        "dimension_scores": {
+          "type": "object",
+          "additionalProperties": {"type": "number", "minimum": 0, "maximum": 10}
+        },
+        "region_scores": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/region-score"}
+        },
+        "findings": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["critical", "high", "medium", "low", "polish"],
+          "properties": {
+            "critical": {"type": "array", "items": {"$ref": "#/$defs/finding"}},
+            "high": {"type": "array", "items": {"$ref": "#/$defs/finding"}},
+            "medium": {"type": "array", "items": {"$ref": "#/$defs/finding"}},
+            "low": {"type": "array", "items": {"$ref": "#/$defs/finding"}},
+            "polish": {"type": "array", "items": {"$ref": "#/$defs/finding"}}
+          }
+        },
+        "top_corrections": {"type": "array", "items": {"type": "string", "minLength": 1}},
+        "constraint_violations": {"type": "array", "items": {"$ref": "#/$defs/finding"}},
+        "evidence_missing": {"type": "array", "items": {"type": "string", "minLength": 1}}
+      }
+    },
+    "iteration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "action", "before_render_id", "target", "reason", "status"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+        "action": {"type": "string", "enum": ["edit", "regenerate", "stop"]},
+        "before_render_id": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+        "after_render_id": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+        "target": {"type": "string", "minLength": 1},
+        "reason": {"type": "string", "minLength": 1},
+        "status": {"type": "string", "enum": ["complete", "partial", "blocked", "skipped"]},
+        "correction_brief": {"type": "string", "minLength": 1},
+        "score_before": {"type": "number", "minimum": 0, "maximum": 100},
+        "score_after": {"type": "number", "minimum": 0, "maximum": 100},
+        "evidence": {"type": "array", "items": {"type": "string", "minLength": 1}},
+        "stop_reason": {"$ref": "#/$defs/stop-reason"}
+      }
+    },
+    "ledger-entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "render_id", "region", "viewport", "state", "expected", "observed", "severity", "evidence", "fix", "status"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+        "render_id": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+        "region": {"type": "string", "minLength": 1},
+        "viewport": {"$ref": "#/$defs/viewport"},
+        "state": {"type": "string", "minLength": 1},
+        "expected": {"type": "string", "minLength": 1},
+        "observed": {"type": "string", "minLength": 1},
+        "severity": {"type": "string", "enum": ["critical", "high", "medium", "low", "polish"]},
+        "evidence": {"type": "array", "items": {"type": "string", "minLength": 1}},
+        "fix": {"type": "string"},
+        "status": {"type": "string", "enum": ["open", "fixed", "accepted", "not-run", "blocked"]},
+        "score": {"type": "number", "minimum": 0, "maximum": 100}
+      }
+    },
+    "region-score": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["region", "render_id", "score"],
+      "properties": {
+        "region": {"type": "string", "minLength": 1},
+        "render_id": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+        "score": {"type": "number", "minimum": 0, "maximum": 100},
+        "viewport": {"$ref": "#/$defs/viewport"},
+        "state": {"type": "string", "minLength": 1},
+        "evidence": {"type": "array", "items": {"type": "string", "minLength": 1}}
+      }
+    },
+    "gate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status"],
+      "properties": {
+        "status": {"type": "string", "enum": ["pass", "fail", "not-run", "blocked", "not-applicable"]},
+        "evidence": {"type": "array", "items": {"type": "string", "minLength": 1}},
+        "notes": {"type": "string"},
+        "report": {
+          "oneOf": [
+            {"type": "string", "minLength": 1},
+            {"type": "object"}
+          ]
+        }
+      }
+    },
+    "gates": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "render": {"$ref": "#/$defs/gate"},
+        "inspection": {"$ref": "#/$defs/gate"},
+        "execution": {"$ref": "#/$defs/gate"},
+        "score": {"$ref": "#/$defs/gate"},
+        "coverage": {"$ref": "#/$defs/gate"},
+        "artifact_completeness": {"$ref": "#/$defs/gate"},
+        "reference": {"$ref": "#/$defs/gate"},
+        "independent-critique": {"$ref": "#/$defs/gate"},
+        "identity": {"$ref": "#/$defs/gate"},
+        "asset_acceptance": {"$ref": "#/$defs/gate"},
+        "accessibility": {"$ref": "#/$defs/gate"},
+        "responsive": {"$ref": "#/$defs/gate"},
+        "performance": {"$ref": "#/$defs/gate"},
+        "anti_slop": {"$ref": "#/$defs/gate"},
+        "typography": {"$ref": "#/$defs/gate"},
+        "copy_stress": {"$ref": "#/$defs/gate"},
+        "critical_findings": {"$ref": "#/$defs/gate"}
+      }
+    },
+    "final-decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["verdict", "reason", "stop_reason"],
+      "properties": {
+        "verdict": {"type": "string", "enum": ["PASS", "CONDITIONAL PASS", "FAIL", "BLOCKED", "AAA CANDIDATE"]},
+        "reason": {"type": "string", "minLength": 1},
+        "stop_reason": {"$ref": "#/$defs/stop-reason"},
+        "score": {"type": "number", "minimum": 0, "maximum": 100},
+        "requested_verdict": {"type": "string", "enum": ["PASS", "CONDITIONAL PASS", "FAIL", "BLOCKED", "AAA CANDIDATE"]},
+        "evidence_confidence": {"type": "string", "enum": ["HIGH", "MEDIUM", "LOW"]},
+        "approved_by": {"type": "string", "minLength": 1},
+        "decided_at": {"type": "string", "minLength": 1},
+        "evidence": {"type": "array", "items": {"type": "string", "minLength": 1}},
+        "render_ids": {"type": "array", "minItems": 1, "items": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"}},
+        "inspection_id": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+        "score_id": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+        "critique_id": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"}
+      }
+    },
+    "stop-reason": {
+      "type": "string",
+      "enum": [
+        "threshold",
+        "no-material-correction",
+        "budget-exhausted",
+        "tool-unavailable",
+        "cost-latency",
+        "marginal-improvement",
+        "human-override",
+        "blocked",
+        "not-run",
+        "critical-failure"
+      ]
+    },
+    "iteration-budget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["max_cycles", "cycles_used", "remaining_cycles"],
+      "properties": {
+        "max_cycles": {"type": "integer", "minimum": 1, "maximum": 4},
+        "cycles_used": {"type": "integer", "minimum": 0, "maximum": 4},
+        "remaining_cycles": {"type": "integer", "minimum": 0, "maximum": 4}
+      }
+    },
+    "human-override": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scope",
+        "reason",
+        "tradeoff",
+        "residual_risk",
+        "compensating_evidence",
+        "owner",
+        "revalidation_trigger",
+        "accepted_below_threshold"
+      ],
+      "properties": {
+        "scope": {"type": "string", "minLength": 1},
+        "reason": {"type": "string", "minLength": 1},
+        "tradeoff": {"type": "string", "minLength": 1},
+        "residual_risk": {"type": "string", "minLength": 1},
+        "compensating_evidence": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+        "owner": {"type": "string", "minLength": 1},
+        "revalidation_trigger": {"type": "string", "minLength": 1},
+        "accepted_below_threshold": {"type": "boolean"},
+        "requested_verdict": {"type": "string", "enum": ["CONDITIONAL PASS", "PASS"]}
+      }
+    },
+    "blind-packet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "request",
+        "constraints",
+        "references",
+        "artifact",
+        "acceptance_criteria",
+        "builder_rationale_withheld",
+        "self_score_withheld"
+      ],
+      "properties": {
+        "request": {"type": "string", "minLength": 1},
+        "constraints": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+        "references": {"type": "array", "items": {"type": "string", "minLength": 1}},
+        "artifact": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+        "acceptance_criteria": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+        "builder_rationale_withheld": {"const": true},
+        "self_score_withheld": {"const": true}
+      }
+    },
+    "reviewer-provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["process", "context_shared", "rationale_received", "self_score_received", "builder_id", "packet_digest"],
+      "properties": {
+        "process": {"type": "string", "minLength": 1},
+        "builder_id": {"type": "string", "minLength": 1},
+        "context_shared": {
+          "type": "array",
+          "minItems": 4,
+          "items": {"type": "string", "enum": ["request", "constraints", "references", "artifact", "acceptance_criteria"]}
+        },
+        "rationale_received": {"const": false},
+        "self_score_received": {"const": false},
+        "packet_digest": {"type": "string", "pattern": "^[a-fA-F0-9]{64}$"}
+      }
+    }
+  }
+}

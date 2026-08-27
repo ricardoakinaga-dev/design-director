@@ -15,6 +15,8 @@ Design Director is the visual-governance layer. The specialist that owns the har
 | 3D asset preparation | `web-3d-asset-pipeline` or actual installed specialist | Style, material, camera, scale, visual acceptance | GLB/GLTF optimization recipes |
 | Chart semantics/data encoding | `data-visualization`, `visualization-strategy-and-critique` | Brand language and non-data visual critique only | Data semantics, misleading encodings, chart implementation |
 | Skill packaging | `skill-creator` / `plugin-creator` | Visual purpose and examples | Generic Codex package scaffolding |
+| Benchmark contract/run packet | Design Director harness (`benchmarks/`, stdlib validators) | Brief, artifact role, acceptance, evidence confidence and gates | Browser/imagegen/Figma/game mechanics |
+| Independent visual critique | Separated read-only critic, peer agent or host reviewer | Blind packet, criteria, region ledger and correction priority | Builder rationale, auto-score or file mutation |
 
 ## Precedence
 
@@ -23,6 +25,7 @@ Design Director is the visual-governance layer. The specialist that owns the har
 3. Design Director remains active when visual intent, brand direction, cross-specialist coordination, or visual critique is the main problem.
 4. For multi-skill work, appoint one implementation owner and one visual-governance owner. Do not have two skills independently invent the same token or asset contract.
 5. If current installed names differ, inspect their actual `SKILL.md` frontmatter and route to the available name. Never infer callable availability from a cache, README, or marketplace listing alone.
+6. A benchmark or critic contract does not create a renderer. Bind only artifacts and screenshots actually supplied by the host, and report unavailable Browser/IAB, Figma, imagegen or runtime capability as `NOT_RUN`/`BLOCKED`.
 
 ## Collision examples
 

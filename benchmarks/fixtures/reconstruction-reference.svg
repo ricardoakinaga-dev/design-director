@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900" role="img" aria-labelledby="title desc">
+  <title id="title">Synthetic Northstar Relay command-center reference</title>
+  <desc id="desc">A dark command-center screen with a navigation rail, route brief, status metrics, activity chart, and handoff table.</desc>
+  <defs>
+    <linearGradient id="canvas" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#101b2a"/>
+      <stop offset="1" stop-color="#16263a"/>
+    </linearGradient>
+    <linearGradient id="route-card" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1c3449"/>
+      <stop offset="1" stop-color="#172a3d"/>
+    </linearGradient>
+  </defs>
+  <rect width="1440" height="900" fill="url(#canvas)"/>
+  <rect width="238" height="900" fill="#0b1421"/>
+  <rect x="238" width="1" height="900" fill="#24364b"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="42" y="58" fill="#edf4f4" font-size="21" font-weight="700" letter-spacing="1">NORTHSTAR</text>
+    <text x="42" y="82" fill="#71879a" font-size="11" letter-spacing="2">RELAY / OPERATIONS</text>
+    <g fill="#7e94a9" font-size="14">
+      <text x="42" y="152">Overview</text>
+      <text x="42" y="202" fill="#f2b58b" font-weight="700">Route briefs</text>
+      <text x="42" y="252">Proof of work</text>
+      <text x="42" y="302">Team</text>
+    </g>
+    <rect x="28" y="176" width="180" height="44" rx="10" fill="#1a3042"/>
+    <circle cx="52" cy="198" r="5" fill="#f2b58b"/>
+    <rect x="28" y="760" width="180" height="1" fill="#24364b"/>
+    <text x="42" y="806" fill="#71879a" font-size="12">Workspace</text>
+    <text x="42" y="836" fill="#d9e6e6" font-size="14">Tidelane North</text>
+
+    <rect x="239" width="1201" height="92" fill="#132338"/>
+    <text x="286" y="48" fill="#f1f5f5" font-size="18" font-weight="700">Route briefs</text>
+    <text x="286" y="70" fill="#7790a4" font-size="12">Tuesday, 14 May · 09:42 local operations time</text>
+    <rect x="1158" y="28" width="116" height="36" rx="18" fill="#ef9e6d"/>
+    <text x="1186" y="51" fill="#152738" font-size="12" font-weight="700">NEW BRIEF</text>
+    <circle cx="1328" cy="46" r="18" fill="#274359"/>
+    <text x="1320" y="52" fill="#e9f0ef" font-size="13" font-weight="700">RN</text>
+
+    <text x="286" y="146" fill="#7f98ab" font-size="12" letter-spacing="1.6">TODAY'S HANDOFFS</text>
+    <text x="286" y="190" fill="#f2f6f4" font-size="34" font-weight="700">Keep the route moving.</text>
+    <text x="286" y="220" fill="#94a9b7" font-size="15">Four handoffs need a decision before the next field window.</text>
+
+    <rect x="286" y="258" width="520" height="206" rx="14" fill="url(#route-card)" stroke="#2a465a"/>
+    <text x="316" y="297" fill="#8fa8b6" font-size="12" letter-spacing="1.3">NEXT ROUTE BRIEF</text>
+    <text x="316" y="337" fill="#f2f6f4" font-size="24" font-weight="700">Harbor loop / 07</text>
+    <text x="316" y="369" fill="#a4b7bf" font-size="14">Proof of work due in 38 minutes</text>
+    <rect x="316" y="404" width="138" height="34" rx="17" fill="#274b4e"/>
+    <circle cx="337" cy="421" r="5" fill="#73d2a5"/>
+    <text x="352" y="426" fill="#a9e8c7" font-size="12">ON TRACK</text>
+    <text x="700" y="426" fill="#f2b58b" font-size="12" text-anchor="end">OPEN BRIEF →</text>
+
+    <rect x="832" y="258" width="560" height="206" rx="14" fill="#15283c" stroke="#2a465a"/>
+    <text x="862" y="297" fill="#8fa8b6" font-size="12" letter-spacing="1.3">HANDOFF TEMPO</text>
+    <text x="862" y="337" fill="#f2f6f4" font-size="24" font-weight="700">12 min median</text>
+    <text x="862" y="369" fill="#a4b7bf" font-size="14">Last seven completed route briefs</text>
+    <path d="M862 425 C904 392 930 414 962 386 S1015 409 1046 373 S1096 391 1128 356 S1180 370 1210 342 S1272 350 1308 319" fill="none" stroke="#72d3b0" stroke-width="4"/>
+    <path d="M862 425 H1320" stroke="#365267" stroke-width="1"/>
+    <path d="M862 335 V425" stroke="#365267" stroke-width="1"/>
+
+    <text x="286" y="522" fill="#f2f6f4" font-size="18" font-weight="700">Handoff queue</text>
+    <text x="286" y="548" fill="#849aaa" font-size="13">Compare route status before opening detail.</text>
+    <rect x="1160" y="504" width="232" height="36" rx="18" fill="#182f43" stroke="#345167"/>
+    <text x="1181" y="527" fill="#9db1bd" font-size="12">FILTER: ALL ROUTES</text>
+
+    <rect x="286" y="578" width="1106" height="232" rx="14" fill="#13263a" stroke="#2a465a"/>
+    <g fill="#7e98a8" font-size="11" letter-spacing="1.2">
+      <text x="316" y="615">ROUTE</text>
+      <text x="610" y="615">OWNER</text>
+      <text x="810" y="615">STATUS</text>
+      <text x="1014" y="615">DUE</text>
+      <text x="1204" y="615">LAST PROOF</text>
+    </g>
+    <g font-size="14">
+      <text x="316" y="658" fill="#eef5f2">Harbor loop / 07</text>
+      <text x="610" y="658" fill="#a8bbc2">M. Chen</text>
+      <circle cx="818" cy="653" r="5" fill="#f2b58b"/>
+      <text x="834" y="658" fill="#f2c49f">At risk</text>
+      <text x="1014" y="658" fill="#eef5f2">10:20</text>
+      <text x="1204" y="658" fill="#a8bbc2">8 min ago</text>
+      <path d="M316 678 H1362" stroke="#274156"/>
+      <text x="316" y="718" fill="#eef5f2">Cedar pass / 03</text>
+      <text x="610" y="718" fill="#a8bbc2">A. Singh</text>
+      <circle cx="818" cy="713" r="5" fill="#73d2a5"/>
+      <text x="834" y="718" fill="#a9e8c7">On track</text>
+      <text x="1014" y="718" fill="#eef5f2">11:05</text>
+      <text x="1204" y="718" fill="#a8bbc2">3 min ago</text>
+      <path d="M316 738 H1362" stroke="#274156"/>
+      <text x="316" y="778" fill="#eef5f2">Salt meadow / 12</text>
+      <text x="610" y="778" fill="#a8bbc2">J. Rivera</text>
+      <circle cx="818" cy="773" r="5" fill="#9bb9d1"/>
+      <text x="834" y="778" fill="#adc1cd">Awaiting proof</text>
+      <text x="1014" y="778" fill="#eef5f2">11:40</text>
+      <text x="1204" y="778" fill="#a8bbc2">—</text>
+    </g>
+  </g>
+</svg>

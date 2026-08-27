@@ -1,0 +1,75 @@
+{
+  "id": "B07-game-ui-asset-family",
+  "category": "game-ui",
+  "brief": {
+    "objective": "Create a coherent original game visual family spanning character, world, HUD, icons, collectible, and environment while preserving gameplay readability at actual scale.",
+    "audience": "A player reading state, danger, and collectible affordances quickly during a short play session.",
+    "surface": "Original 2D exploration game slice named Tidelane, with HUD and art-family assets.",
+    "primary_action": "Read the next playable objective",
+    "acceptance_criteria": ["Character, world, HUD, icon, collectible, and environment assets share silhouette, palette, material, lighting, and perspective grammar.", "Player, danger, collectible, objective, and interaction states remain legible at intended in-game scale.", "HUD typography and controls are code-native, responsive, and separate from decorative art assets.", "The family is original and does not rely on protected characters, worlds, logos, or recognizable franchises.", "Alpha edges, anchors, frame dimensions, fallback/loading states, and performance characteristics are inspected."]
+  },
+  "inputs": [
+    { "id": "game-family-reference", "role": "fixture", "kind": "fixture", "provenance": "repository-existing", "path": "benchmarks/fixtures/game-ui-family.svg" },
+    { "id": "game-art-brief", "role": "brief", "kind": "request", "provenance": "repository-existing", "content": "Original Tidelane 2D exploration family: ink navy, sea-glass teal, warm coral, salt cream; side-on orthographic read; weathered paper and sea-glass material; HUD text remains code-native." }
+  ],
+  "references": [
+    { "id": "game-family-style", "role": "style", "path": "benchmarks/fixtures/game-ui-family.svg", "provenance": "repository-existing", "notes": "Use cel-shaded, tidepool-inspired visual grammar for an original family; do not copy protected expression." },
+    { "id": "game-family-composition", "role": "composition", "path": "benchmarks/fixtures/game-ui-family.svg", "provenance": "repository-existing", "notes": "Use the relationship between HUD, character silhouette, environment tile, and collectible as family evidence." },
+    { "id": "game-family-color", "role": "color", "path": "benchmarks/fixtures/game-ui-family.svg", "provenance": "repository-existing", "notes": "Preserve readable value separation between player, hazard, collectible, and HUD states." },
+    { "id": "game-family-material", "role": "material", "path": "benchmarks/fixtures/game-ui-family.svg", "provenance": "repository-existing", "notes": "Use sea-glass, ink, and warm coral material cues consistently across the family." }
+  ],
+  "constraints": {
+    "scope": "new",
+    "must_include": ["One original player/character asset", "One world/environment asset", "Code-native HUD with health/resource/objective cues", "Consistent icon and collectible family", "Anchor/origin, frame size, alpha, and intended display scale for each raster asset"],
+    "must_avoid": ["Protected game characters, franchises, logos, or copied UI motifs", "HUD text baked into raster art", "Detail that hides danger, player, collectible, or objective state", "Unbounded glow/neon, arbitrary icon styles, mismatched perspective", "Approving a family from a single isolated asset"],
+    "technology": ["Game runtime or game-ui specialist for playable surface", "Code-native HUD", "SVG/raster sprites with explicit anchor, alpha, and frame contract"],
+    "accessibility": ["Pair color-coded state with shape, icon, label, or motion-independent cue.", "Respect reduced motion and provide readable UI labels at supported scales.", "Provide keyboard/touch alternatives for HUD interaction."],
+    "responsive": ["At 390x844, HUD scales/reflows without covering player, objective, or interaction target.", "At 800x600, gameplay readability and icon separation remain intact.", "At 1280x720, the family reads as one world rather than unrelated assets."],
+    "notes": "Art bible: 2D exploration; side-on shallow layered depth; rounded utility forms with one angular navigation cue; ink navy/sea-glass teal/warm coral/salt cream; weathered paper and sea-glass; soft directional dusk light; orthographic side-on perspective; feet/base anchor for character and bottom-center anchor for HUD icons. Product specificity: hide the fixture title and judge whether material, silhouette, palette, and readable game states still belong to Tidelane. Performance: inspect texture dimensions, alpha edges, atlas/frame consistency, load/fallback, and small-scale use. Edit when family identity/readability is sound and one local sprite/icon/alpha/anchor/HUD placement needs correction; regenerate when direction, silhouette language, or family consistency is structurally wrong across roles. Stop at threshold, readability block, no material correction, budget exhaustion, tool block, or marginal improvement."
+  },
+  "viewports": [
+    { "name": "mobile-play", "width": 390, "height": 844, "device": "phone", "orientation": "portrait", "required": true },
+    { "name": "small-desktop", "width": 800, "height": 600, "device": "desktop", "orientation": "landscape", "required": true },
+    { "name": "wide-play", "width": 1280, "height": 720, "device": "desktop", "orientation": "landscape", "required": true }
+  ],
+  "states": [
+    { "id": "custom-idle", "description": "Playable frame with stable HUD and character/world read.", "required": true },
+    { "id": "custom-objective-visible", "description": "Objective cue is readable and anchored.", "required": true },
+    { "id": "custom-damage", "description": "Damage state is perceivable without color alone.", "required": true },
+    { "id": "custom-collectible-nearby", "description": "Collectible silhouette and affordance remain distinct.", "required": true },
+    { "id": "custom-interaction-available", "description": "Interaction target and action cue are readable.", "required": true },
+    { "id": "custom-pause", "description": "Pause state keeps essential status and recovery clear.", "required": false },
+    { "id": "loading", "description": "Loading state preserves honest fallback and layout.", "required": true },
+    { "id": "custom-fallback-asset", "description": "Missing asset fallback does not misrepresent a final approved asset.", "required": true },
+    { "id": "custom-reduced-motion", "description": "Motion-independent cues retain state meaning.", "required": true },
+    { "id": "custom-small-scale", "description": "Assets are inspected at intended 1x display scale.", "required": true }
+  ],
+  "regions": ["hud", "character", "world", "icon-family", "collectible", "environment"],
+  "expected_artifacts": [
+    { "id": "game-art-bible", "kind": "report", "role": "art-bible and identity-safe family contract", "required": true, "format": "json-or-markdown" },
+    { "id": "character-asset", "kind": "asset", "role": "original player character asset", "required": true, "format": "png-svg-or-atlas" },
+    { "id": "world-asset", "kind": "asset", "role": "original world/environment asset", "required": true, "format": "png-svg-or-atlas" },
+    { "id": "hud-implementation", "kind": "code", "role": "code-native responsive HUD", "required": true, "format": "game-ui-code" },
+    { "id": "icon-collectible-family", "kind": "asset", "role": "consistent icon and collectible family", "required": true, "format": "png-svg-or-atlas" },
+    { "id": "game-render-set", "kind": "render", "role": "playable renders at mobile/small-desktop/wide-play", "required": true, "format": "png" },
+    { "id": "game-asset-acceptance", "kind": "report", "role": "silhouette scale anchor alpha family and performance inspection", "required": true, "format": "json" },
+    { "id": "game-critic", "kind": "critique", "role": "blinded independent visual critic report", "required": true, "format": "json" },
+    { "id": "game-final-decision", "kind": "report", "role": "evidence-backed final decision", "required": true, "format": "json" }
+  ],
+  "preservation_rules": {
+    "immutable": ["Original Tidelane art-bible constraints and gameplay state meanings", "Code-native HUD copy and interaction semantics", "Asset role separation between world art, sprites, HUD, and effects"],
+    "high_sensitivity": ["Player/danger/collectible silhouette readability", "Anchor, frame dimensions, alpha edges, palette value separation, and scale", "Family consistency across all visual roles"],
+    "flexible": ["Exact character anatomy, environment composition, effect treatment, secondary icon geometry, engine, and atlas layout"],
+    "forbidden_inference": ["Do not import recognizable IP, franchise lore, logos, or copied UI identity.", "Do not treat the style sheet as a finished playable output or proof of runtime behavior."]
+  },
+  "quality_threshold": {
+    "overall_min": 90,
+    "aaa_min": 95,
+    "evidence_confidence_min": "HIGH",
+    "require_independent_critic": true,
+    "block_critical": true,
+    "block_high": true,
+    "required_gates": ["render", "inspection", "independent-critique", "responsive", "accessibility", "performance", "anti-slop"]
+  },
+  "iteration_budget": 4
+}

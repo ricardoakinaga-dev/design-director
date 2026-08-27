@@ -1,0 +1,73 @@
+{
+  "id": "B04-mobile-flow",
+  "category": "mobile",
+  "brief": {
+    "objective": "Design a touch-first mobile flow for creating a route handoff, including form validation, recovery, keyboard behavior, and completion feedback.",
+    "audience": "A field coordinator creating a handoff on a phone with one hand and intermittent connectivity.",
+    "surface": "Mobile-first route-handoff flow for Northstar Relay.",
+    "primary_action": "Save handoff",
+    "acceptance_criteria": ["The primary task, current step, back behavior, and save action are obvious and reachable.", "Inputs use appropriate types, labels, validation, error placement, and recovery behavior.", "The virtual keyboard does not obscure the active field or primary action without a recovery path.", "Touch targets, focus states, safe-area behavior, and reduced-motion behavior are verified.", "Short, long, empty, error, success, and intermittent-network content do not collapse the flow."]
+  },
+  "inputs": [
+    {
+      "id": "mobile-flow-context",
+      "role": "brief",
+      "kind": "request",
+      "provenance": "repository-existing",
+      "content": "Northstar Relay New route handoff. Fields: Route name, Handoff time, Notes, Proof of work. Exact CTA: Save handoff. Exact validation example: Add a route name before saving."
+    }
+  ],
+  "references": [],
+  "constraints": {
+    "scope": "new",
+    "must_include": ["Clear top bar/back affordance and progress or context cue", "Route name, handoff time, notes, and attachment/proof affordances with useful labels", "Inline validation, summary recovery, disabled/loading save, and success confirmation", "Keyboard-open state and a no-connection or retry state", "Visible focus and touch targets suitable for touch-first use"],
+    "must_avoid": ["Hover-dependent interaction", "Tiny icon-only controls without an equivalent label", "Desktop columns squeezed into a phone", "Errors communicated only by red or only at the top", "Unbounded auto-advance or motion that traps the user"],
+    "technology": ["Semantic HTML/CSS/components", "Native input types and code-native form copy"],
+    "accessibility": ["Associate every label, hint, error, and status with its control programmatically.", "Restore focus after validation, overlays, and navigation.", "Support keyboard, zoom/reflow, reduced motion, screen-reader-relevant structure, and non-color error cues."],
+    "responsive": ["Use mobile-specific composition at 375px and preserve the task at 390px.", "At 768px, use an intentional wider form composition rather than simply scaling the phone layout.", "Respect safe-area insets and keep the primary action reachable above or through the keyboard."],
+    "notes": "Copy stress: short and very long route names, long notes, empty notes, large time value, and localized label expansion. Product specificity: expose operational handoff and proof-of-work context; do not read as a generic contact form. Performance/truthfulness: never display upload/save success while network state is unknown. Edit when flow model is correct but a field, keyboard, state, focus, or touch affordance has a local defect; regenerate when desktop-first structure obscures the task or cannot recover errors. Stop at threshold, no material correction, budget exhaustion, tool block, or marginal improvement."
+  },
+  "viewports": [
+    { "name": "small-mobile", "width": 375, "height": 812, "device": "phone", "orientation": "portrait", "required": true },
+    { "name": "large-mobile", "width": 390, "height": 844, "device": "phone", "orientation": "portrait", "required": true },
+    { "name": "tablet", "width": 768, "height": 1024, "device": "tablet", "orientation": "portrait", "required": true }
+  ],
+  "states": [
+    { "id": "default", "description": "Empty new-handoff form with primary task context.", "required": true },
+    { "id": "focus", "description": "Focused field and controls have visible keyboard focus.", "required": true },
+    { "id": "keyboard-open-mobile", "description": "Virtual keyboard leaves active field and recovery/action path usable.", "required": true },
+    { "id": "custom-loading-save", "description": "Save progress is perceivable and prevents accidental duplicate action.", "required": true },
+    { "id": "custom-validation-error", "description": "Field error is associated, local, and recoverable.", "required": true },
+    { "id": "custom-network-error", "description": "Unknown save/upload state explains retry without false success.", "required": true },
+    { "id": "success", "description": "Successful save confirmation has a clear next action.", "required": true },
+    { "id": "disabled", "description": "Unavailable action has an understandable reason.", "required": false },
+    { "id": "long-content", "description": "Long route name and notes preserve layout and recovery.", "required": true },
+    { "id": "custom-reduced-motion", "description": "Reduced motion preserves state and feedback meaning.", "required": true }
+  ],
+  "regions": ["navigation", "primary-task", "form", "actions", "keyboard-area", "error-recovery"],
+  "expected_artifacts": [
+    { "id": "mobile-flow-implementation", "kind": "ui", "role": "touch-first route-handoff flow", "required": true, "format": "html-css-or-component" },
+    { "id": "mobile-flow-render-set", "kind": "render", "role": "rendered evidence at small-mobile/large-mobile/tablet", "required": true, "format": "png" },
+    { "id": "mobile-flow-interaction-evidence", "kind": "report", "role": "keyboard validation network success and copy-stress evidence", "required": true, "format": "json" },
+    { "id": "mobile-flow-accessibility-evidence", "kind": "report", "role": "semantic keyboard focus names errors touch and reflow evidence", "required": true, "format": "json" },
+    { "id": "mobile-flow-ledger", "kind": "ledger", "role": "navigation primary-task form actions keyboard-area error-recovery ledger", "required": true, "format": "json" },
+    { "id": "mobile-flow-critic", "kind": "critique", "role": "blinded independent visual critic report", "required": true, "format": "json" },
+    { "id": "mobile-flow-final-decision", "kind": "report", "role": "evidence-backed final decision", "required": true, "format": "json" }
+  ],
+  "preservation_rules": {
+    "immutable": ["Field meanings and exact required error/CTA copy", "Save-handoff workflow and recovery intent"],
+    "high_sensitivity": ["Active field visibility with keyboard open", "Validation association and focus restoration", "Primary action reachability and success/error truthfulness"],
+    "flexible": ["Step indicator, field grouping, illustration, surface treatment, and tablet composition"],
+    "forbidden_inference": ["Do not claim upload or save succeeded when network state is unknown.", "Do not infer permissions, retention, or offline guarantees not in the brief."]
+  },
+  "quality_threshold": {
+    "overall_min": 90,
+    "aaa_min": 95,
+    "evidence_confidence_min": "HIGH",
+    "require_independent_critic": true,
+    "block_critical": true,
+    "block_high": true,
+    "required_gates": ["render", "inspection", "independent-critique", "responsive", "accessibility", "performance", "anti-slop"]
+  },
+  "iteration_budget": 3
+}

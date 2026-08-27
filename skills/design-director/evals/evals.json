@@ -225,6 +225,94 @@
         "Retorna problemas concretos e não trata a própria afirmação de PASS como evidência."
       ],
       "expected_skill": "design-director"
+    },
+    {
+      "id": "dd-21-benchmark-result-contract",
+      "prompt": "Execute o benchmark B02 para esta landing page e entregue o pacote de resultado completo, do artefato à crítica final.",
+      "expected_output": "Vincula benchmark, artefato, render, inspeções por viewport/estado/região, score aplicável, critic independente, iterações e decisão final; sem evidência, marca BLOCKED.",
+      "expectations": [
+        "Usa o contrato machine-readable do benchmark e não um checklist textual solto.",
+        "Não atribui PASS sem render atual, evidência suficiente e crítica separada.",
+        "Registra limitações e confidence da evidência no pacote final."
+      ],
+      "expected_skill": "design-director"
+    },
+    {
+      "id": "dd-22-critic-blinding",
+      "prompt": "Critique esta tela renderizada contra o brief e a referência. O builder diz que já está perfeita, mas não inclua essa justificativa na avaliação.",
+      "expected_output": "Executa crítica read-only e blinded com request/constraints/reference/artifact/criteria, sem receber narrativa defensiva ou auto-score; reporta verdict, score, confidence e achados priorizados.",
+      "expectations": [
+        "Ignora a justificativa e não a repete como evidência.",
+        "Classifica a independência real como SELF/SEPARATED_SELF/PEER/INDEPENDENT.",
+        "Inclui regiões, severidade, evidence missing e top corrections."
+      ],
+      "expected_skill": "design-director"
+    },
+    {
+      "id": "dd-23-adaptive-iteration",
+      "prompt": "O primeiro render do hero ficou abaixo do threshold: composição correta, mas CTA ilegível no crop mobile. Decida entre editar e regenerar e itere com budget explícito.",
+      "expected_output": "Preserva a identidade e escolhe edição localizada, registra correction brief, novo render, score fresco e stop condition; não entra em loop ilimitado.",
+      "expectations": [
+        "Escolhe EDIT quando o problema é localizado e a identidade está correta.",
+        "Respeita budget adaptativo e registra o motivo de parada.",
+        "Não aprova Generation 1 de material visual importante sem inspeção."
+      ],
+      "expected_skill": "design-director"
+    },
+    {
+      "id": "dd-24-aaa-gate",
+      "prompt": "O artifact recebeu 96/100, mas não houve crítica independente nem teste responsive. Posso chamar isso de AAA?",
+      "expected_output": "Não. Explica que AAA Candidate exige todos os gates: score, zero Critical, identidade intacta, acessibilidade, responsive QA, crítica independente, confidence HIGH e ausência de AI-slop significativa.",
+      "expectations": [
+        "Não trata score alto como verdade absoluta.",
+        "Mantém o veredito bloqueado/condicional enquanto gates obrigatórios faltarem.",
+        "Nomeia evidência necessária para desbloquear a decisão."
+      ],
+      "expected_skill": "design-director"
+    },
+    {
+      "id": "dd-25-region-ledger",
+      "prompt": "Audite uma landing page nos estados default, focus, error e conteúdo longo em 375, 768 e 1440px; o header passou, mas o CTA mobile e o footer falharam.",
+      "expected_output": "Registra ledger por viewport/estado/região, score regional e prioriza o maior gap material em vez de esconder a falha na média da página.",
+      "expectations": [
+        "Separa Header, Hero, Trust, Features, Proof, CTA e Footer quando aplicável.",
+        "Inclui expected/observed/severity/evidence/fix/status em cada observação.",
+        "Não deixa uma região crítica passar apenas porque a média global é alta."
+      ],
+      "expected_skill": "design-director"
+    },
+    {
+      "id": "dd-26-asset-provenance",
+      "prompt": "Audite os assets entregues para uma campanha: uma imagem tem baixa resolução, outra tem nome suspeito e a origem do logo não está registrada.",
+      "expected_output": "Bloqueia ou condiciona a aceitação conforme o papel do asset, reporta dimensions/aspect/format/alpha/hash/role/provenance e não apaga origem silenciosamente.",
+      "expectations": [
+        "Distingue repository-existing, user-supplied, generated, edited, licensed e unknown.",
+        "Relaciona baixa resolução ao placement/crop e não somente ao tamanho do arquivo.",
+        "Propõe correção rastreável sem substituir identidade por aproximação."
+      ],
+      "expected_skill": "design-director"
+    },
+    {
+      "id": "dd-27-frontend-gates",
+      "prompt": "Antes de aprovar esta interface, verifique acessibilidade, performance visual, tipografia e stress de copy; só tenho código e nenhum screenshot.",
+      "expected_output": "Executa os checks estáticos suportados, marca render/interação como LOW ou NOT_RUN, e não chama a interface de visualmente completa sem evidência real.",
+      "expectations": [
+        "Cobre keyboard/focus/semantics/names/errors/non-color/reduced-motion/touch/zoom/reflow quando houver evidência.",
+        "Verifica LCP/CLS/media/fonts e typography/copy apenas nos formatos suportados.",
+        "Separa inspeção de código de aprovação visual."
+      ],
+      "expected_skill": "design-director"
+    },
+    {
+      "id": "dd-28-product-specificity",
+      "prompt": "A landing page está bonita, mas parece um template SaaS intercambiável. Faça uma crítica de especificidade sem proibir o estilo visual escolhido.",
+      "expected_output": "Aplica o product-specificity test e o anti-slop detector contextual, propondo domínio, workflows, dados, metáfora, composição ou interação nativos do produto.",
+      "expectations": [
+        "Não transforma anti-slop em proibição de gradiente, cards ou estética específica.",
+        "Pergunta se a tela ainda pareceria deste produto sem logo/nome.",
+        "Prioriza correções de significado e estrutura antes de decoração."
+      ],
+      "expected_skill": "design-director"
     }
   ]
 }

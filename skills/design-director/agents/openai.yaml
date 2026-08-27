@@ -2,7 +2,7 @@ interface:
   display_name: "Design Director"
   short_description: "Direct premium visual product work"
   brand_color: "#101828"
-  default_prompt: "Use $design-director to direct the strategy, visual system, assets, implementation, and QA for this experience."
+  default_prompt: "Use $design-director to direct the strategy, visual system, assets, implementation, and evidence-driven visual QA for this experience."
 
 policy:
   allow_implicit_invocation: true

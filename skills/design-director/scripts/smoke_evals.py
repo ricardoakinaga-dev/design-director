@@ -34,6 +34,14 @@ REQUIRED_IDS = {
     "dd-18-visual-regression-positive",
     "dd-19-data-visualization-boundary",
     "dd-20-package-handoff",
+    "dd-21-benchmark-result-contract",
+    "dd-22-critic-blinding",
+    "dd-23-adaptive-iteration",
+    "dd-24-aaa-gate",
+    "dd-25-region-ledger",
+    "dd-26-asset-provenance",
+    "dd-27-frontend-gates",
+    "dd-28-product-specificity",
 }
 
 

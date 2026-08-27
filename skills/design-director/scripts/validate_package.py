@@ -9,6 +9,7 @@ import re
 import sys
 from pathlib import Path
 
+from benchmark_validate import validate_benchmark_directory
 from smoke_evals import check_cases
 
 
@@ -18,12 +19,17 @@ REQUIRED_REFERENCES = {
     "art-direction.md",
     "banner-design.md",
     "color.md",
+    "asset-acceptance.md",
     "dashboards.md",
     "degradation-and-evidence.md",
     "design-principles.md",
     "design-systems.md",
+    "critic-contract.md",
+    "frontend-quality-gates.md",
     "game-visuals.md",
     "imagegen-direction.md",
+    "identity-and-references.md",
+    "iteration-policy.md",
     "landing-pages.md",
     "mobile.md",
     "motion.md",
@@ -39,6 +45,7 @@ REQUIRED_REFERENCES = {
     "workflows.md",
 }
 LINK_RE = re.compile(r"\]\(([^)]+)\)")
+SKIP_SCAN_DIRECTORIES = {".git", ".plugin-eval", ".venv", "__pycache__", "node_modules"}
 
 
 def frontmatter_errors(text: str, expected_name: str) -> list[str]:
@@ -95,9 +102,31 @@ def main() -> int:
     errors.extend(f"broken local link: {link}" for link in broken_links(root))
     errors.extend(
         f"missing helper script: scripts/{name}"
-        for name in ("audit_assets.py", "check_contrast.py", "smoke_evals.py")
+        for name in (
+            "audit_assets.py",
+            "audit_design_tokens.py",
+            "benchmark_validate.py",
+            "check_contrast.py",
+            "compare_visual.py",
+            "quality_gates.py",
+            "score_visual.py",
+            "smoke_evals.py",
+        )
         if not (root / "scripts" / name).is_file()
     )
+
+    repository_root = root.parent.parent
+    benchmark_root = repository_root / "benchmarks"
+    if benchmark_root.is_dir():
+        benchmark_report = validate_benchmark_directory(benchmark_root, repository_root)
+        if not benchmark_report["valid"]:
+            errors.extend(
+                f"benchmark catalog: {error}"
+                for error in benchmark_report.get("errors", [])
+            )
+            for file_result in benchmark_report.get("files", []):
+                for error in file_result.get("errors", []):
+                    errors.append(f"benchmark {file_result.get('path', benchmark_root)}: {error}")
 
     evals_path = root / "evals" / "evals.json"
     if not evals_path.is_file():
@@ -119,7 +148,9 @@ def main() -> int:
     errors.extend(
         f"TODO placeholder found in {path.relative_to(root)}"
         for path in root.rglob("*")
-        if path.is_file() and marker in path.read_text(encoding="utf-8", errors="replace")
+        if path.is_file()
+        and not any(part in SKIP_SCAN_DIRECTORIES for part in path.parts)
+        and marker in path.read_text(encoding="utf-8", errors="replace")
     )
 
     if errors:

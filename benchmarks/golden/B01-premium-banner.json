@@ -1,0 +1,96 @@
+{
+  "id": "B01-premium-banner",
+  "category": "banner",
+  "brief": {
+    "objective": "Create a premium responsive campaign banner for a field-kit collection with a clear first-glance message and one useful next action.",
+    "audience": "A time-poor outdoor customer scanning a campaign page on mobile or desktop.",
+    "surface": "Responsive campaign banner inside a marketing shell.",
+    "primary_action": "Explore the field kit",
+    "acceptance_criteria": [
+      "Message, supporting context, and primary action scan in that order.",
+      "The subject has a deliberate focal point and remains identifiable at the smallest viewport.",
+      "The reference informs composition and crop without becoming copied layout or baked-in UI copy.",
+      "Desktop and mobile crops preserve the safe text zone, focal subject, readable copy, and reachable CTA.",
+      "The result is specific to an outdoor field-kit product rather than a generic template."
+    ]
+  },
+  "inputs": [
+    {
+      "id": "brief-input",
+      "role": "brief",
+      "kind": "request",
+      "provenance": "repository-existing",
+      "content": "Northstar Field Kit banner; exact copy: Northstar Field Kit / Built for the next field note. / A considered kit for the miles between here and there. / Explore the field kit."
+    },
+    {
+      "id": "banner-reference-art",
+      "role": "fixture",
+      "kind": "fixture",
+      "provenance": "repository-existing",
+      "path": "benchmarks/fixtures/banner-reference.svg"
+    }
+  ],
+  "references": [
+    {
+      "id": "banner-composition-reference",
+      "role": "composition",
+      "path": "benchmarks/fixtures/banner-reference.svg",
+      "provenance": "repository-existing",
+      "notes": "Use the left negative space and right-side focal mass as evidence; do not copy the fixture text or geometry literally."
+    },
+    {
+      "id": "banner-color-reference",
+      "role": "color",
+      "path": "benchmarks/fixtures/banner-reference.svg",
+      "provenance": "repository-existing",
+      "notes": "Use the restrained dusk palette as direction, not as a mandatory pixel palette."
+    }
+  ],
+  "constraints": {
+    "scope": "new",
+    "must_include": ["One primary CTA with an explicit label", "One focal subject or product cue", "A text-safe zone distinct from the focal subject", "An art-directed desktop crop and mobile crop"],
+    "must_avoid": ["Multiple competing CTAs", "Unreadable text over high-frequency imagery", "Fake discount, urgency, testimonial, or performance claims", "Generic purple-blue gradient, purposeless glow, or decorative blob", "Rasterized interface copy when HTML or SVG can carry it"],
+    "technology": ["HTML/CSS or component implementation for copy and CTA", "SVG or an appropriately sized raster asset for the visual subject"],
+    "accessibility": ["Use semantic heading and button/link structure with visible focus.", "Maintain readable contrast over the actual image crop and provide non-color action cues.", "Support reduced motion and meaningful image alt/decorative treatment."],
+    "responsive": ["At 375px, recompose without losing headline, focal subject, safe zone, or CTA.", "At 768px, avoid an awkward midpoint crop.", "At 1440px, keep the composition anchored and text measure controlled."],
+    "notes": "Product specificity: hiding the logo must still leave an outdoor field-kit visual through content, material, subject, and hierarchy. Performance: use responsive dimensions and do not ship an oversized hero. Edit when identity/composition are sound but crop, safe zone, contrast, or a local artifact needs correction; regenerate when subject, visual territory, or whole composition is structurally wrong. Stop at threshold, no material correction, budget exhaustion, tool block, or marginal improvement."
+  },
+  "viewports": [
+    { "name": "mobile", "width": 375, "height": 812, "device": "phone", "orientation": "portrait", "required": true },
+    { "name": "intermediate", "width": 768, "height": 900, "device": "tablet", "orientation": "landscape", "required": true },
+    { "name": "wide", "width": 1440, "height": 900, "device": "desktop", "orientation": "landscape", "required": true }
+  ],
+  "states": [
+    { "id": "default", "description": "Full banner with supplied copy and primary CTA.", "required": true },
+    { "id": "hover", "description": "CTA hover treatment remains clear and restrained.", "required": false },
+    { "id": "focus", "description": "Keyboard focus is visible on the CTA.", "required": true },
+    { "id": "loading", "description": "Slow image loading does not destroy copy hierarchy or layout stability.", "required": true },
+    { "id": "custom-reduced-motion", "description": "Motion is reduced without removing meaning or feedback.", "required": true }
+  ],
+  "regions": ["subject", "focal-area", "copy-cta", "safe-zones", "crop"],
+  "expected_artifacts": [
+    { "id": "responsive-banner", "kind": "ui", "role": "responsive banner implementation", "required": true, "format": "html-css-or-component" },
+    { "id": "banner-render-set", "kind": "render", "role": "rendered crop evidence at mobile/intermediate/wide", "required": true, "format": "png" },
+    { "id": "banner-inspection", "kind": "report", "role": "crop safe-zone copy contrast subject and performance inspection", "required": true, "format": "json" },
+    { "id": "banner-ledger", "kind": "ledger", "role": "viewport and state visual regression ledger", "required": true, "format": "json" },
+    { "id": "banner-critic", "kind": "critique", "role": "blinded independent visual critic report", "required": true, "format": "json" },
+    { "id": "banner-iteration-record", "kind": "report", "role": "bounded edit-or-regenerate iteration record", "required": true, "format": "json" },
+    { "id": "banner-final-decision", "kind": "report", "role": "evidence-backed final decision", "required": true, "format": "json" }
+  ],
+  "preservation_rules": {
+    "immutable": ["Exact supplied copy and primary action meaning", "Outdoor field-kit product context"],
+    "high_sensitivity": ["Focal subject identity and material cues", "Text safe-zone relationship to subject", "CTA reachability and contrast"],
+    "flexible": ["Background texture, secondary details, crop strategy, and accessible type pairing"],
+    "forbidden_inference": ["Do not invent price, stock, certification, customer proof, or product performance.", "Do not treat the fixture as a logo or packaging identity."]
+  },
+  "quality_threshold": {
+    "overall_min": 90,
+    "aaa_min": 95,
+    "evidence_confidence_min": "HIGH",
+    "require_independent_critic": true,
+    "block_critical": true,
+    "block_high": true,
+    "required_gates": ["render", "inspection", "responsive", "accessibility", "performance", "anti-slop"]
+  },
+  "iteration_budget": 3
+}

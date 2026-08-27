@@ -18,8 +18,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Design Director",
-    "shortDescription": "Direct premium visual product work",
-    "longDescription": "A senior design orchestration skill for product interfaces, brand systems, image-directed experiences, responsive implementation, and evidence-driven visual QA.",
+    "shortDescription": "Direct evidence-driven visual product work",
+    "longDescription": "A senior design orchestration skill for product interfaces, brand systems, image-directed experiences, responsive implementation, independent critique, and evidence-driven visual QA.",
     "developerName": "Local Design Director",
     "category": "Creativity",
     "capabilities": [
@@ -27,14 +27,15 @@
       "UI/UX design",
       "Design systems",
       "Image direction",
-      "Visual QA"
+      "Visual QA",
+      "Visual benchmark harness"
     ],
     "brandColor": "#101828",
     "composerIcon": "assets/design-director.svg",
     "defaultPrompt": [
-      "Use $design-director to direct this product's visual system.",
-      "Use $design-director to redesign this interface and verify the result.",
-      "Use $design-director to create a brand-aware visual direction."
+      "Use $design-director to direct this product's visual system and evidence.",
+      "Use $design-director to redesign this interface and verify the rendered result.",
+      "Use $design-director to create a brand-aware visual direction and critique loop."
     ],
     "screenshots": []
   }

@@ -22,6 +22,9 @@ Must preserve:
 Must include:
 Must avoid:
 Acceptance evidence:
+Benchmark/run contract and expected artifacts:
+Viewport/state/region matrix:
+Quality threshold and iteration budget:
 Open assumptions:
 Owner and next boundary:
 ```
@@ -33,3 +36,5 @@ Owner and next boundary:
 - Translate concepts into tokens, components, CSS, SVG, or image roles; do not leave “make it premium” as an implementation requirement.
 - State whether a result is exploratory, approved for implementation, implemented, or visually verified.
 - Include a known-bad condition where useful so the evaluator can tell whether the check rejects a miss.
+- Bind acceptance to an artifact, render, inspection, critic, score and stop decision when visual execution is in scope. A prose description or builder confidence is not evidence.
+- Record `HIGH`, `MEDIUM`, or `LOW` evidence confidence and mark missing Browser/IAB, imagegen, Figma, font, reference, or runtime evidence as `NOT RUN`/`BLOCKED`.

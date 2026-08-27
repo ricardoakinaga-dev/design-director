@@ -1,0 +1,60 @@
+{
+  "version": 1,
+  "assets": [
+    {
+      "path": "assets/design-director.svg",
+      "role": "plugin-icon",
+      "provenance": "repository-existing",
+      "source": "Repository package asset",
+      "dimensions": { "width": 512, "height": 512, "viewBox": "0 0 512 512" },
+      "format": "svg",
+      "expected_role": "Design Director plugin icon",
+      "references": [],
+      "is_output": false
+    },
+    {
+      "path": "benchmarks/fixtures/banner-reference.svg",
+      "role": "reference-composition",
+      "provenance": "repository-existing",
+      "source": "Original SVG authored for the Design Director benchmark suite",
+      "dimensions": { "width": 1600, "height": 700, "viewBox": "0 0 1600 700" },
+      "format": "svg",
+      "expected_role": "Wide editorial banner reference with left text-safe negative space and right focal mass",
+      "references": ["B01-premium-banner"],
+      "is_output": false
+    },
+    {
+      "path": "benchmarks/fixtures/reconstruction-reference.svg",
+      "role": "screenshot-reference",
+      "provenance": "repository-existing",
+      "source": "Original synthetic SVG authored for the Design Director benchmark suite",
+      "dimensions": { "width": 1440, "height": 900, "viewBox": "0 0 1440 900" },
+      "format": "svg",
+      "expected_role": "Synthetic command-center reference frame for semantic screenshot reconstruction",
+      "references": ["B05-screenshot-reconstruction"],
+      "is_output": false
+    },
+    {
+      "path": "benchmarks/fixtures/northstar-packaging.svg",
+      "role": "identity-reference",
+      "provenance": "repository-existing",
+      "source": "Original fictional Northstar package SVG authored for the Design Director benchmark suite",
+      "dimensions": { "width": 1200, "height": 900, "viewBox": "0 0 1200 900" },
+      "format": "svg",
+      "expected_role": "Northstar package identity reference for product/brand fidelity checks",
+      "references": ["B06-product-brand-identity"],
+      "is_output": false
+    },
+    {
+      "path": "benchmarks/fixtures/game-ui-family.svg",
+      "role": "game-family-reference",
+      "provenance": "repository-existing",
+      "source": "Original fictional Tidelane SVG style sheet authored for the Design Director benchmark suite",
+      "dimensions": { "width": 1600, "height": 900, "viewBox": "0 0 1600 900" },
+      "format": "svg",
+      "expected_role": "Original character/world/HUD/icon/collectible/environment family reference",
+      "references": ["B07-game-ui-asset-family"],
+      "is_output": false
+    }
+  ]
+}

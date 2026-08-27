@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Original Tidelane game UI and asset family reference</title>
+  <desc id="desc">A fictional side-on exploration game style sheet showing a player silhouette, layered tidepool environment, HUD, icons, and collectible family.</desc>
+  <defs>
+    <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#102d42"/>
+      <stop offset="1" stop-color="#071723"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8bd0c0"/>
+      <stop offset="1" stop-color="#387f86"/>
+    </linearGradient>
+    <linearGradient id="coral" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffb77d"/>
+      <stop offset="1" stop-color="#d65b5f"/>
+    </linearGradient>
+    <pattern id="grain" width="80" height="80" patternUnits="userSpaceOnUse">
+      <circle cx="12" cy="15" r="1.4" fill="#d9f0dc" opacity="0.16"/>
+      <circle cx="54" cy="40" r="1" fill="#d9f0dc" opacity="0.14"/>
+      <circle cx="28" cy="67" r="0.8" fill="#d9f0dc" opacity="0.12"/>
+    </pattern>
+  </defs>
+  <rect width="1600" height="900" fill="url(#sea)"/>
+  <rect width="1600" height="900" fill="url(#grain)"/>
+  <path d="M0 570 C210 482 364 542 530 492 C722 434 892 522 1070 462 C1260 398 1410 470 1600 410 V900 H0Z" fill="#123b4b"/>
+  <path d="M0 678 C208 574 404 660 596 584 C808 500 978 642 1166 556 C1335 480 1460 554 1600 516 V900 H0Z" fill="#0b2838"/>
+  <path d="M0 758 C190 678 336 750 526 690 C760 616 948 734 1156 650 C1332 578 1482 654 1600 622 V900 H0Z" fill="#071b29"/>
+
+  <g transform="translate(64 54)" font-family="Arial, Helvetica, sans-serif">
+    <rect width="580" height="94" rx="22" fill="#0b2131" stroke="#477c83" stroke-width="2"/>
+    <circle cx="48" cy="47" r="25" fill="#162f42" stroke="#8bd0c0" stroke-width="3"/>
+    <path d="M48 29 L53 42 L67 47 L53 52 L48 66 L43 52 L29 47 L43 42Z" fill="#ffb77d"/>
+    <text x="88" y="42" fill="#d9f0dc" font-size="17" font-weight="700">TIDELANE</text>
+    <text x="88" y="65" fill="#8cb4b4" font-size="12" letter-spacing="1.5">OBJECTIVE / REACH THE LOW TIDE GATE</text>
+    <rect x="438" y="30" width="100" height="32" rx="16" fill="#173c48"/>
+    <text x="464" y="51" fill="#9de0c8" font-size="12" font-weight="700">3 / 5</text>
+  </g>
+
+  <g transform="translate(250 400)">
+    <path d="M0 190 L42 112 L88 98 L132 132 L168 214 L156 250 H10Z" fill="#173f4d" stroke="#8bd0c0" stroke-width="4"/>
+    <path d="M48 114 L54 38 L104 22 L136 76 L112 129Z" fill="#ffb77d" stroke="#132939" stroke-width="5"/>
+    <path d="M67 36 L72 -2 L96 18 L102 44Z" fill="#8bd0c0" stroke="#132939" stroke-width="5"/>
+    <circle cx="80" cy="65" r="5" fill="#132939"/>
+    <path d="M43 250 L20 314 M128 250 L148 314" stroke="#8bd0c0" stroke-width="13" stroke-linecap="round"/>
+    <path d="M14 316 H66 M103 316 H158" stroke="#ffb77d" stroke-width="9" stroke-linecap="round"/>
+    <text x="0" y="370" fill="#c7ead7" font-family="Arial, Helvetica, sans-serif" font-size="13" letter-spacing="1.4">PLAYER / LANTERN RUNNER</text>
+  </g>
+
+  <g transform="translate(650 470)">
+    <path d="M0 180 Q84 92 174 142 Q268 195 352 100 Q420 31 516 84" fill="none" stroke="#285c66" stroke-width="34" stroke-linecap="round"/>
+    <path d="M8 168 Q92 80 176 128 Q270 180 360 88 Q430 18 522 70" fill="none" stroke="#8bd0c0" stroke-opacity="0.52" stroke-width="7" stroke-linecap="round"/>
+    <path d="M82 224 l38 -82 40 82z M282 220 l34 -64 38 64z M450 184 l28 -52 34 52z" fill="#ffb77d" opacity="0.8"/>
+    <circle cx="212" cy="136" r="18" fill="#ffb77d" stroke="#fff0cb" stroke-width="4"/>
+    <path d="M212 112 V160 M188 136 H236" stroke="#163044" stroke-width="4"/>
+    <text x="0" y="286" fill="#c7ead7" font-family="Arial, Helvetica, sans-serif" font-size="13" letter-spacing="1.4">ENVIRONMENT / LOW TIDE PASS</text>
+  </g>
+
+  <g transform="translate(1140 258)" font-family="Arial, Helvetica, sans-serif">
+    <rect width="360" height="300" rx="22" fill="#0b2131" stroke="#477c83" stroke-width="2"/>
+    <text x="32" y="42" fill="#d9f0dc" font-size="14" font-weight="700" letter-spacing="1.5">FAMILY PLATE</text>
+    <g transform="translate(36 78)">
+      <circle cx="42" cy="42" r="38" fill="#173c48" stroke="#8bd0c0" stroke-width="3"/>
+      <path d="M42 18 L48 35 L66 42 L48 49 L42 68 L35 49 L18 42 L35 35Z" fill="#ffb77d"/>
+      <text x="0" y="104" fill="#8cb4b4" font-size="11">OBJECTIVE</text>
+    </g>
+    <g transform="translate(151 78)">
+      <circle cx="42" cy="42" r="38" fill="#173c48" stroke="#8bd0c0" stroke-width="3"/>
+      <path d="M42 13 L67 30 L58 65 H26 L17 30Z" fill="url(#glass)" stroke="#d9f0dc" stroke-width="3"/>
+      <circle cx="42" cy="42" r="9" fill="#173c48"/>
+      <text x="11" y="104" fill="#8cb4b4" font-size="11">COLLECTIBLE</text>
+    </g>
+    <g transform="translate(266 78)">
+      <circle cx="42" cy="42" r="38" fill="#173c48" stroke="#8bd0c0" stroke-width="3"/>
+      <path d="M42 15 L73 66 H11Z" fill="url(#coral)" stroke="#fff0cb" stroke-width="3"/>
+      <path d="M42 31 V51" stroke="#173044" stroke-width="5" stroke-linecap="round"/>
+      <circle cx="42" cy="59" r="3" fill="#173044"/>
+      <text x="18" y="104" fill="#8cb4b4" font-size="11">DANGER</text>
+    </g>
+    <rect x="32" y="210" width="296" height="54" rx="14" fill="#173c48"/>
+    <text x="53" y="243" fill="#d9f0dc" font-size="13">Readability at 1× / 2× / 4×</text>
+  </g>
+
+  <g transform="translate(1060 686)" font-family="Arial, Helvetica, sans-serif">
+    <rect width="440" height="118" rx="20" fill="#0b2131" stroke="#477c83" stroke-width="2"/>
+    <circle cx="54" cy="59" r="30" fill="#173c48" stroke="#8bd0c0" stroke-width="3"/>
+    <path d="M54 39 L60 52 L75 59 L60 66 L54 80 L48 66 L33 59 L48 52Z" fill="#ffb77d"/>
+    <text x="104" y="52" fill="#d9f0dc" font-size="15" font-weight="700">NEXT: LOW TIDE GATE</text>
+    <text x="104" y="75" fill="#8cb4b4" font-size="12">Move toward the warm beacon.</text>
+  </g>
+</svg>

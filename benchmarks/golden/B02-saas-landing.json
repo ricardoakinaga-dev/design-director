@@ -1,0 +1,76 @@
+{
+  "id": "B02-saas-landing",
+  "category": "landing-page",
+  "brief": {
+    "objective": "Design and implement a product-specific SaaS landing page that turns a complex workflow into a credible, scannable story.",
+    "audience": "A team lead evaluating whether a field-operations workspace fits an existing workflow.",
+    "surface": "Responsive marketing landing page for Northstar Relay, a fictional field-operations coordination product.",
+    "primary_action": "Start a workspace",
+    "acceptance_criteria": [
+      "The above-the-fold proposition, context, and primary action are immediately legible.",
+      "Sections follow a purposeful narrative: orientation, mechanism, workflow proof, objections, and next step.",
+      "Product-specific terminology and workflow evidence distinguish the page from a generic SaaS template.",
+      "Long copy, mobile navigation, form error, and reduced-motion states remain coherent.",
+      "No unsupported customer logos, metrics, testimonials, urgency, or capability claims appear as facts."
+    ]
+  },
+  "inputs": [
+    {
+      "id": "product-context",
+      "role": "brief",
+      "kind": "request",
+      "provenance": "repository-existing",
+      "content": "Northstar Relay: One calm workspace for the handoffs that keep field work moving. Use the terms route brief, handoff, proof of work, and offline note. Primary CTA: Start a workspace."
+    }
+  ],
+  "references": [],
+  "constraints": {
+    "scope": "new",
+    "must_include": ["One clear primary conversion path", "A mechanism section grounded in field-operations vocabulary", "A truthful workflow or interface proof section without fabricated metrics", "Objection handling, final CTA, useful footer navigation, and labeled placeholders when needed"],
+    "must_avoid": ["Generic three-column feature repetition", "Fake logos, customer quotes, numbers, certifications, or unsupported social proof", "Hero illustration unrelated to field operations", "Excessive pills, card soup, arbitrary gradients, decorative charts, or a changed product category"],
+    "technology": ["Semantic HTML/CSS/components", "Code-native copy and stateful form controls"],
+    "accessibility": ["Use semantic landmarks and one logical page heading.", "Test keyboard navigation, visible focus, form labels, error association, non-color cues, zoom/reflow, and reduced motion."],
+    "responsive": ["At 375px, menu, hero, CTA, proof, and form remain reachable without squeezed desktop columns.", "At 768px, recompose at content breakpoints and avoid orphaned copy.", "At 1440px, keep controlled reading measure and narrative rhythm."],
+    "notes": "Exact product truth: Northstar Relay / One calm workspace for the handoffs that keep field work moving. Product specificity test: hide logo and judge whether field-operations vocabulary, workflow proof, data shape, and hierarchy still identify the product. Performance: specify image dimensions, responsive sources, lazy-loading policy, and font-display behavior. Edit when narrative/system is sound but one section, state, or responsive behavior has a localized gap; regenerate when the page remains generic or the product category is wrong. Stop at threshold, no material correction, budget exhaustion, tool block, or marginal improvement."
+  },
+  "viewports": [
+    { "name": "mobile", "width": 375, "height": 812, "device": "phone", "orientation": "portrait", "required": true },
+    { "name": "intermediate", "width": 768, "height": 1024, "device": "tablet", "orientation": "portrait", "required": true },
+    { "name": "wide", "width": 1440, "height": 1100, "device": "desktop", "orientation": "landscape", "required": true }
+  ],
+  "states": [
+    { "id": "default", "description": "Complete page with truthful fixture content.", "required": true },
+    { "id": "custom-mobile-menu-open", "description": "Mobile navigation opens, traps no focus accidentally, and preserves the primary path.", "required": true },
+    { "id": "focus", "description": "Keyboard focus is visible across navigation, CTA, and form controls.", "required": true },
+    { "id": "custom-form-error", "description": "Form error is local, associated, perceivable, and recoverable.", "required": true },
+    { "id": "custom-long-headline", "description": "A realistic longer headline does not collapse hierarchy or CTA reachability.", "required": true },
+    { "id": "custom-long-body-copy", "description": "Long supporting copy preserves measure and rhythm.", "required": true },
+    { "id": "custom-reduced-motion", "description": "Reduced motion retains continuity and state meaning.", "required": true }
+  ],
+  "regions": ["header", "hero", "mechanism", "proof", "objection", "cta", "footer"],
+  "expected_artifacts": [
+    { "id": "landing-implementation", "kind": "ui", "role": "responsive product-specific landing page", "required": true, "format": "html-css-or-component" },
+    { "id": "landing-render-set", "kind": "render", "role": "rendered evidence at mobile/intermediate/wide", "required": true, "format": "png" },
+    { "id": "landing-state-evidence", "kind": "report", "role": "menu focus form-error and copy-stress interaction evidence", "required": true, "format": "json" },
+    { "id": "landing-ledger", "kind": "ledger", "role": "region and viewport visual regression ledger", "required": true, "format": "json" },
+    { "id": "landing-critic", "kind": "critique", "role": "blinded independent visual critic report", "required": true, "format": "json" },
+    { "id": "landing-score", "kind": "report", "role": "applicable-dimension quality score with evidence confidence", "required": true, "format": "json" },
+    { "id": "landing-final-decision", "kind": "report", "role": "evidence-backed final decision", "required": true, "format": "json" }
+  ],
+  "preservation_rules": {
+    "immutable": ["Northstar Relay product category and supplied positioning", "Primary CTA meaning and product vocabulary"],
+    "high_sensitivity": ["Narrative order from orientation to conversion", "Truthful workflow proof", "Mobile CTA reachability and form recovery"],
+    "flexible": ["Illustration medium, section arrangement within narrative, type pairing, palette, and surface treatment"],
+    "forbidden_inference": ["Do not invent customers, logos, numbers, certifications, integrations, or legal claims.", "Do not infer a visual identity from a generic SaaS trend."]
+  },
+  "quality_threshold": {
+    "overall_min": 90,
+    "aaa_min": 95,
+    "evidence_confidence_min": "HIGH",
+    "require_independent_critic": true,
+    "block_critical": true,
+    "block_high": true,
+    "required_gates": ["render", "inspection", "independent-critique", "responsive", "accessibility", "performance", "anti-slop"]
+  },
+  "iteration_budget": 3
+}

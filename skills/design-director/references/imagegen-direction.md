@@ -18,8 +18,8 @@ Use the Visual Prompt Compiler in the main skill. Name the asset role, subject, 
 
 ## Acceptance
 
-Inspect every candidate for subject fidelity, identity drift, anatomy/object integrity, edge quality, text spelling, contrast, crop, alpha/transparency, dimensions, file format, and loadability in its consuming surface. Reject generic, unreadable, overprocessed, or unlicensed outputs. Record provenance and the consuming role.
+Inspect every candidate for subject fidelity, composition, identity drift, anatomy/object integrity, edge quality, text spelling, contrast, crop/safe zones, alpha/transparency, dimensions, file format, loadability, integration suitability and mobile suitability. Reject generic, unreadable, overprocessed, or unlicensed outputs. Record provenance and the consuming role. For important assets, use an explicit acceptance gate and do not accept Generation 1 without inspection.
 
 ## Variants and edits
 
-Keep identity locks stable across variants. Change local, structural, or style axes deliberately. Use targeted edits for local corrections and a new composition only when the composition itself changes. Preserve the original and use a new filename for each approved output.
+Keep identity locks stable across variants. Change local, structural, or style axes deliberately. Use targeted edits when identity/composition is correct and the correction is localized; regenerate when composition, direction or multiple structural constraints fail. Preserve the original, use a new filename for each candidate/approved output, and stop after the benchmark's bounded iteration budget with a recorded reason.

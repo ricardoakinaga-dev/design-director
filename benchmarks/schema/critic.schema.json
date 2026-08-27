@@ -1,0 +1,152 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ricardoakinaga-dev/design-director/benchmarks/schema/critic.schema.json",
+  "title": "Independent visual critic result",
+  "description": "Read-only critique contract. A PASS is not valid without blinded independence and evidence.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "benchmark_id",
+    "run_id",
+    "inspection_id",
+    "created_at",
+    "reviewer_id",
+    "independent",
+    "blinded",
+    "independence",
+    "verdict",
+    "overall_score",
+    "confidence",
+    "evidence_confidence",
+    "evidence_quality",
+    "blind_packet",
+    "reviewer_provenance",
+    "findings",
+    "top_corrections",
+    "constraint_violations",
+    "evidence_missing"
+  ],
+  "properties": {
+    "schema_version": {"type": "string", "const": "1"},
+    "benchmark_id": {"type": "string", "pattern": "^B[0-9]{2}-[a-z0-9]+(?:-[a-z0-9]+)*$"},
+    "run_id": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+    "inspection_id": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+    "created_at": {"type": "string", "minLength": 1},
+    "reviewer_id": {"type": "string", "minLength": 1},
+    "independent": {"type": "boolean"},
+    "blinded": {"type": "boolean"},
+    "independence": {"type": "string", "enum": ["SELF", "SEPARATED_SELF", "PEER", "INDEPENDENT"]},
+    "verdict": {"type": "string", "enum": ["PASS", "CONDITIONAL PASS", "FAIL", "BLOCKED"]},
+    "overall_score": {"type": ["number", "null"], "minimum": 0, "maximum": 100},
+    "confidence": {"type": "string", "enum": ["HIGH", "MEDIUM", "LOW"]},
+    "evidence_confidence": {"type": "string", "enum": ["HIGH", "MEDIUM", "LOW"]},
+    "evidence_quality": {"type": "string", "enum": ["HIGH", "MEDIUM", "LOW", "NONE"]},
+    "blind_packet": {"$ref": "#/$defs/blind-packet"},
+    "reviewer_provenance": {"$ref": "#/$defs/reviewer-provenance"},
+    "dimension_scores": {
+      "type": "object",
+      "additionalProperties": {"type": "number", "minimum": 0, "maximum": 10}
+    },
+    "region_scores": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+            "required": ["region", "render_id", "score"],
+            "properties": {
+              "region": {"type": "string", "minLength": 1},
+              "render_id": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+          "score": {"type": "number", "minimum": 0, "maximum": 100},
+          "viewport": {
+            "oneOf": [
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["width", "height"],
+                "properties": {
+                  "width": {"type": "integer", "minimum": 240, "maximum": 7680},
+                  "height": {"type": "integer", "minimum": 320, "maximum": 4320},
+                  "name": {"type": "string", "minLength": 1},
+                  "dpr": {"type": "number", "minimum": 0.5, "maximum": 8},
+                  "orientation": {"type": "string", "enum": ["portrait", "landscape", "responsive"]}
+                }
+              }
+            ]
+          },
+          "state": {"type": "string", "minLength": 1},
+          "evidence": {"type": "array", "items": {"type": "string", "minLength": 1}}
+        }
+      }
+    },
+    "findings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["critical", "high", "medium", "low", "polish"],
+      "properties": {
+        "critical": {"type": "array", "items": {"$ref": "#/$defs/finding"}},
+        "high": {"type": "array", "items": {"$ref": "#/$defs/finding"}},
+        "medium": {"type": "array", "items": {"$ref": "#/$defs/finding"}},
+        "low": {"type": "array", "items": {"$ref": "#/$defs/finding"}},
+        "polish": {"type": "array", "items": {"$ref": "#/$defs/finding"}}
+      }
+    },
+    "top_corrections": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "constraint_violations": {"type": "array", "items": {"$ref": "#/$defs/finding"}},
+    "evidence_missing": {"type": "array", "items": {"type": "string", "minLength": 1}}
+  },
+  "$defs": {
+    "blind-packet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "request",
+        "constraints",
+        "references",
+        "artifact",
+        "acceptance_criteria",
+        "builder_rationale_withheld",
+        "self_score_withheld"
+      ],
+      "properties": {
+        "request": {"type": "string", "minLength": 1},
+        "constraints": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+        "references": {"type": "array", "items": {"type": "string", "minLength": 1}},
+        "artifact": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+        "acceptance_criteria": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+        "builder_rationale_withheld": {"const": true},
+        "self_score_withheld": {"const": true}
+      }
+    },
+    "reviewer-provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["process", "context_shared", "rationale_received", "self_score_received", "builder_id", "packet_digest"],
+      "properties": {
+        "process": {"type": "string", "minLength": 1},
+        "builder_id": {"type": "string", "minLength": 1},
+        "context_shared": {
+          "type": "array",
+          "minItems": 4,
+          "items": {"type": "string", "enum": ["request", "constraints", "references", "artifact", "acceptance_criteria"]}
+        },
+        "rationale_received": {"const": false},
+        "self_score_received": {"const": false},
+        "packet_digest": {"type": "string", "pattern": "^[a-fA-F0-9]{64}$"}
+      }
+    },
+    "finding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "severity", "description", "location", "evidence", "status"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "severity": {"type": "string", "enum": ["critical", "high", "medium", "low", "polish"]},
+        "description": {"type": "string", "minLength": 1},
+        "location": {"type": "string", "minLength": 1},
+        "evidence": {"type": "array", "items": {"type": "string", "minLength": 1}},
+        "status": {"type": "string", "enum": ["open", "fixed", "accepted", "not-run", "blocked"]}
+      }
+    }
+  }
+}

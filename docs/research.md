@@ -2,6 +2,8 @@
 
 Research date: 2026-08-26. The workspace was empty before this package was created, so the record covers the current Codex/plugin surfaces and local companion skills rather than an existing application.
 
+This research is a compatibility record, not a guarantee that every host exposes every capability. The benchmark contracts in this repository therefore distinguish `OBSERVED`, `INFERRED`, `NOT_RUN`, and `BLOCKED` evidence.
+
 ## Sources checked
 
 1. [OpenAI plugin concepts](https://developers.openai.com/plugins/concepts/plugins) — a plugin is a package and can contain skills, with MCP/apps optional.
@@ -12,6 +14,35 @@ Research date: 2026-08-26. The workspace was empty before this package was creat
 6. [GPT Image 2 model documentation](https://developers.openai.com/api/docs/models/gpt-image-2) — the current official image model is documented as GPT Image 2 with generation/editing and high-fidelity input support.
 7. [Image generation guide](https://developers.openai.com/api/docs/guides/image-generation) — the built-in image-generation tool is the appropriate conversational route; Image API and Responses API are separate routes with different interaction tradeoffs.
 8. The current official `openai/plugins` checkout was inspected at commit `33bd9529725fcee78c9e51fcbaa93cd963c3a47b`. Its `build-web-apps`, `figma`, `game-studio`, and `plugin-eval` surfaces were compared with the local skill cache.
+
+## Current official and local capability map
+
+### Packaging and skill composition
+
+The current official [plugin build guide](https://developers.openai.com/plugins/build/plugins) still treats `.codex-plugin/plugin.json` as the manifest and `skills: "./skills/"` as the valid skills-only shape. Plugins may optionally add MCP, app UI, hooks, or assets; this package does not require those extras. The official [skill concepts](https://developers.openai.com/plugins/concepts/skills) continue to define a skill as a folder centered on `SKILL.md`, with progressive references and scripts as support surfaces.
+
+The official `openai/plugins` checkout was inspected locally at commit `33bd9529725fcee78c9e51fcbaa93cd963c3a47b`. Its `plugin-eval` package provides static package analysis and model-backed evaluation conventions, including stable result schemas and artifact-oriented benchmark reporting. This repository keeps its own stdlib validator so the visual contracts can run without making plugin-eval or a model endpoint a package dependency.
+
+### Visual execution and specialist ownership
+
+The installed native `imagegen` skill is the current raster specialist: its preferred built-in `image_gen` route does not require `OPENAI_API_KEY`; CLI/API is an explicit fallback. The official [image generation guide](https://developers.openai.com/api/docs/guides/image-generation) documents both Image API generation/editing and the Responses API image tool, while the current [GPT Image 2 model page](https://developers.openai.com/api/docs/models/gpt-image-2) documents the current image model. Design Director owns intent, references, identity lock, selection and acceptance; it does not duplicate generation mechanics or hard-code the model.
+
+The local cache includes `frontend-app-builder` and `frontend-testing-debugging`, direction-specific Figma skills (`figma-design-to-code`, `figma-generate-design`, `figma-implement-motion`), game specialists (`game-studio`, `game-ui-frontend`, `sprite-pipeline`, `game-playtest`), and data-visualization routers/critics. Their actual frontmatter and boundary instructions were inspected. They remain optional specialists; Design Director routes to the installed name and retains cross-surface visual acceptance.
+
+This host exposes native `image_gen`, `view_image`, and subagent capabilities. It does not expose Browser/IAB or a working `agent-browser`/Playwright executable in the current workspace. No Figma connector, frontend app, game runtime, or raster target was available for a live run. The new benchmark harness can consume those artifacts when a capable host supplies them, but current validation must record live browser execution as `BLOCKED`/`NOT_RUN`.
+
+### Current model/tool assumptions
+
+Do not turn the current GPT Image documentation into a runtime model pin. Native tool selection is an abstraction owned by the host and may change. The package records the official model page for research traceability, keeps native generation first, and only describes CLI/API as a separately authorized fallback. No credential is stored, requested, or required by package validation.
+
+### Implications for the benchmark harness
+
+The harness is intentionally two-layered:
+
+1. A portable layer validates benchmark/run/critic/ledger contracts, evidence provenance, score gates, iteration budgets and deterministic static audits.
+2. A host layer performs the real builder, image generation, browser render, interaction, screenshot and independent visual inspection. Its outputs are bound into a run packet; absent outputs cannot receive a PASS or HIGH evidence confidence.
+
+This preserves the official specialist boundaries while making the Design Director's acceptance logic auditable.
 
 ## Architectural decisions
 
